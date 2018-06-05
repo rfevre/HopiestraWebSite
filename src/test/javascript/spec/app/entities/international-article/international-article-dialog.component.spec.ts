@@ -6,37 +6,39 @@ import { Observable } from 'rxjs/Observable';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { HopiestraWebSiteTestModule } from '../../../test.module';
-import { TagDialogComponent } from '../../../../../../main/webapp/app/entities/tag/tag-dialog.component';
-import { TagService } from '../../../../../../main/webapp/app/entities/tag/tag.service';
-import { Tag } from '../../../../../../main/webapp/app/entities/tag/tag.model';
-import { InternationalArticleService } from '../../../../../../main/webapp/app/entities/international-article';
+import { InternationalArticleDialogComponent } from '../../../../../../main/webapp/app/entities/international-article/international-article-dialog.component';
+import { InternationalArticleService } from '../../../../../../main/webapp/app/entities/international-article/international-article.service';
+import { InternationalArticle } from '../../../../../../main/webapp/app/entities/international-article/international-article.model';
+import { LanguageService } from '../../../../../../main/webapp/app/entities/language';
+import { TagService } from '../../../../../../main/webapp/app/entities/tag';
 
 describe('Component Tests', () => {
 
-    describe('Tag Management Dialog Component', () => {
-        let comp: TagDialogComponent;
-        let fixture: ComponentFixture<TagDialogComponent>;
-        let service: TagService;
+    describe('InternationalArticle Management Dialog Component', () => {
+        let comp: InternationalArticleDialogComponent;
+        let fixture: ComponentFixture<InternationalArticleDialogComponent>;
+        let service: InternationalArticleService;
         let mockEventManager: any;
         let mockActiveModal: any;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [HopiestraWebSiteTestModule],
-                declarations: [TagDialogComponent],
+                declarations: [InternationalArticleDialogComponent],
                 providers: [
-                    InternationalArticleService,
-                    TagService
+                    LanguageService,
+                    TagService,
+                    InternationalArticleService
                 ]
             })
-            .overrideTemplate(TagDialogComponent, '')
+            .overrideTemplate(InternationalArticleDialogComponent, '')
             .compileComponents();
         }));
 
         beforeEach(() => {
-            fixture = TestBed.createComponent(TagDialogComponent);
+            fixture = TestBed.createComponent(InternationalArticleDialogComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(TagService);
+            service = fixture.debugElement.injector.get(InternationalArticleService);
             mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
             mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
         });
@@ -46,9 +48,9 @@ describe('Component Tests', () => {
                 inject([],
                     fakeAsync(() => {
                         // GIVEN
-                        const entity = new Tag(123);
+                        const entity = new InternationalArticle(123);
                         spyOn(service, 'update').and.returnValue(Observable.of(new HttpResponse({body: entity})));
-                        comp.tag = entity;
+                        comp.internationalArticle = entity;
                         // WHEN
                         comp.save();
                         tick(); // simulate async
@@ -56,7 +58,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'tagListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'internationalArticleListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -66,9 +68,9 @@ describe('Component Tests', () => {
                 inject([],
                     fakeAsync(() => {
                         // GIVEN
-                        const entity = new Tag();
+                        const entity = new InternationalArticle();
                         spyOn(service, 'create').and.returnValue(Observable.of(new HttpResponse({body: entity})));
-                        comp.tag = entity;
+                        comp.internationalArticle = entity;
                         // WHEN
                         comp.save();
                         tick(); // simulate async
@@ -76,7 +78,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'tagListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'internationalArticleListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

@@ -44,6 +44,9 @@ public class CacheConfiguration {
             cm.createCache(com.hopiestra.site.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
             cm.createCache(com.hopiestra.site.domain.Tag.class.getName(), jcacheConfiguration);
             cm.createCache(com.hopiestra.site.domain.Language.class.getName(), jcacheConfiguration);
+            cm.createCache(com.hopiestra.site.domain.InternationalArticle.class.getName(), jcacheConfiguration);
+            cm.createCache(com.hopiestra.site.domain.InternationalArticle.class.getName() + ".tags", jcacheConfiguration);
+            cm.createCache(com.hopiestra.site.domain.Tag.class.getName() + ".internationalsArticle", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

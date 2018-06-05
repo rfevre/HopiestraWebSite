@@ -1,0 +1,25 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "internationalArticle" : {
+            "home": {
+                "title": "InternationalArticles",
+                "createLabel": "Créer un nouveau International Article",
+                "createOrEditLabel": "Créer ou éditer un International Article"
+            },
+            "created": "Un nouveau International Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le International Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le International Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le International Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "International Article"
+            },
+            "title": "Title",
+            "content": "Content",
+            "language": "Language",
+            "tags": "Tags"
+        }
+    }
+}
