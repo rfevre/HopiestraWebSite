@@ -16,3 +16,6 @@ Dans l'objet java de l'entity ajouter l'annotation suivante :
 
     @Column(name = "[name]", nullable = false, unique = true)
 
+## Importer un css
+
+Pour importer un css, il suffit de rajouter un import de celui-ci dans le fichier "vendor.css".
