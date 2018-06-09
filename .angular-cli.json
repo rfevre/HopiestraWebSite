@@ -22,7 +22,10 @@
             "content/css/vendor.css",
             "content/css/global.css"
         ],
-        "scripts": []
+        "scripts": [
+            "../../../node_modules/jquery/dist/jquery.min.js",
+            "../../../node_modules/froala-editor/js/froala_editor.pkgd.min.js"
+        ]
     }],
     "lint": [{
             "project": "../../../tsconfig.json"
