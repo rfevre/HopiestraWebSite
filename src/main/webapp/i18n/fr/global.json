@@ -10,6 +10,7 @@
                 "tag": "Tag",
                 "language": "Language",
                 "internationalArticle": "International Article",
+                "theme": "Theme",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -131,5 +132,5 @@
         "emailexists": "Email déjà utilisé !",
         "idexists": "Une nouvelle entité {{entityName}} ne peut pas avoir d'ID !"
     },
-    "footer": "Ceci est votre pied de page"
+    "footer": "Powered by FEVRE Rémy"
 }

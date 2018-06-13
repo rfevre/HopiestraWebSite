@@ -1,0 +1,45 @@
+
+<div *ngIf="theme">
+    <h2><span jhiTranslate="hopiestraWebSiteApp.theme.detail.title">Theme</span> {{theme.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hopiestraWebSiteApp.theme.name">Name</span></dt>
+        <dd>
+            <span>{{theme.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.theme.backgroundPicture">Background Picture</span></dt>
+        <dd>
+            <div *ngIf="theme.backgroundPicture">
+                <a (click)="openFile(theme.backgroundPictureContentType, theme.backgroundPicture)">
+                    <img [src]="'data:' + theme.backgroundPictureContentType + ';base64,' + theme.backgroundPicture" style="max-width: 100%;" alt="theme image"/>
+                </a>
+                {{theme.backgroundPictureContentType}}, {{byteSize(theme.backgroundPicture)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.theme.order">Order</span></dt>
+        <dd>
+            <span>{{theme.order}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.theme.parentTheme">Parent Theme</span></dt>
+        <dd>
+            <div *ngIf="theme.parentTheme">
+                <a [routerLink]="['/theme', theme.parentTheme?.id]">{{theme.parentTheme?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'theme/'+ theme.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
