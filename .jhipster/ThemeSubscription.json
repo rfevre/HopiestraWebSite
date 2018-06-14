@@ -1,0 +1,34 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "themes",
+            "otherEntityName": "theme",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "themeSubscriptions"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "(^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}*$)"
+        },
+        {
+            "fieldName": "subscripitonForAll",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180614181058",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "theme_subscription",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

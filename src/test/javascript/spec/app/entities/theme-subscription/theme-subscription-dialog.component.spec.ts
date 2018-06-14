@@ -6,37 +6,37 @@ import { Observable } from 'rxjs/Observable';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { HopiestraWebSiteTestModule } from '../../../test.module';
-import { ThemeDialogComponent } from '../../../../../../main/webapp/app/entities/theme/theme-dialog.component';
-import { ThemeService } from '../../../../../../main/webapp/app/entities/theme/theme.service';
-import { Theme } from '../../../../../../main/webapp/app/entities/theme/theme.model';
-import { ThemeSubscriptionService } from '../../../../../../main/webapp/app/entities/theme-subscription';
+import { ThemeSubscriptionDialogComponent } from '../../../../../../main/webapp/app/entities/theme-subscription/theme-subscription-dialog.component';
+import { ThemeSubscriptionService } from '../../../../../../main/webapp/app/entities/theme-subscription/theme-subscription.service';
+import { ThemeSubscription } from '../../../../../../main/webapp/app/entities/theme-subscription/theme-subscription.model';
+import { ThemeService } from '../../../../../../main/webapp/app/entities/theme';
 
 describe('Component Tests', () => {
 
-    describe('Theme Management Dialog Component', () => {
-        let comp: ThemeDialogComponent;
-        let fixture: ComponentFixture<ThemeDialogComponent>;
-        let service: ThemeService;
+    describe('ThemeSubscription Management Dialog Component', () => {
+        let comp: ThemeSubscriptionDialogComponent;
+        let fixture: ComponentFixture<ThemeSubscriptionDialogComponent>;
+        let service: ThemeSubscriptionService;
         let mockEventManager: any;
         let mockActiveModal: any;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [HopiestraWebSiteTestModule],
-                declarations: [ThemeDialogComponent],
+                declarations: [ThemeSubscriptionDialogComponent],
                 providers: [
-                    ThemeSubscriptionService,
-                    ThemeService
+                    ThemeService,
+                    ThemeSubscriptionService
                 ]
             })
-            .overrideTemplate(ThemeDialogComponent, '')
+            .overrideTemplate(ThemeSubscriptionDialogComponent, '')
             .compileComponents();
         }));
 
         beforeEach(() => {
-            fixture = TestBed.createComponent(ThemeDialogComponent);
+            fixture = TestBed.createComponent(ThemeSubscriptionDialogComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(ThemeService);
+            service = fixture.debugElement.injector.get(ThemeSubscriptionService);
             mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
             mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
         });
@@ -46,9 +46,9 @@ describe('Component Tests', () => {
                 inject([],
                     fakeAsync(() => {
                         // GIVEN
-                        const entity = new Theme(123);
+                        const entity = new ThemeSubscription(123);
                         spyOn(service, 'update').and.returnValue(Observable.of(new HttpResponse({body: entity})));
-                        comp.theme = entity;
+                        comp.themeSubscription = entity;
                         // WHEN
                         comp.save();
                         tick(); // simulate async
@@ -56,7 +56,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.update).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'themeListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'themeSubscriptionListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )
@@ -66,9 +66,9 @@ describe('Component Tests', () => {
                 inject([],
                     fakeAsync(() => {
                         // GIVEN
-                        const entity = new Theme();
+                        const entity = new ThemeSubscription();
                         spyOn(service, 'create').and.returnValue(Observable.of(new HttpResponse({body: entity})));
-                        comp.theme = entity;
+                        comp.themeSubscription = entity;
                         // WHEN
                         comp.save();
                         tick(); // simulate async
@@ -76,7 +76,7 @@ describe('Component Tests', () => {
                         // THEN
                         expect(service.create).toHaveBeenCalledWith(entity);
                         expect(comp.isSaving).toEqual(false);
-                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'themeListModification', content: 'OK'});
+                        expect(mockEventManager.broadcastSpy).toHaveBeenCalledWith({ name: 'themeSubscriptionListModification', content: 'OK'});
                         expect(mockActiveModal.dismissSpy).toHaveBeenCalled();
                     })
                 )

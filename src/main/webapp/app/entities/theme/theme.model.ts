@@ -8,6 +8,7 @@ export class Theme implements BaseEntity {
         public backgroundPicture?: any,
         public order?: number,
         public parentTheme?: BaseEntity,
+        public themeSubscriptions?: BaseEntity[],
     ) {
     }
 }

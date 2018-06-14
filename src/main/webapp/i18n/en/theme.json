@@ -19,7 +19,8 @@
             "name": "Name",
             "backgroundPicture": "Background Picture",
             "order": "Order",
-            "parentTheme": "Parent Theme"
+            "parentTheme": "Parent Theme",
+            "themeSubscriptions": "Theme Subscriptions"
         }
     }
 }

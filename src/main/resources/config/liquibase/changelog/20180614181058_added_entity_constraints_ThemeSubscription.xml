@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ThemeSubscription.
+    -->
+    <changeSet id="20180614181058-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="theme_subscriptions_id"
+                                 baseTableName="theme_subscription_themes"
+                                 constraintName="fk_theme_subscription_themes_theme_subscriptions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="theme_subscription"/>
+        <addForeignKeyConstraint baseColumnNames="themes_id"
+                                 baseTableName="theme_subscription_themes"
+                                 constraintName="fk_theme_subscription_themes_themes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="theme"/>
+        
+    </changeSet>
+</databaseChangeLog>

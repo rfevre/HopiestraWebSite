@@ -4,6 +4,7 @@ import { HopiestraWebSiteTagModule } from './tag/tag.module';
 import { HopiestraWebSiteLanguageModule } from './language/language.module';
 import { HopiestraWebSiteInternationalArticleModule } from './international-article/international-article.module';
 import { HopiestraWebSiteThemeModule } from './theme/theme.module';
+import { HopiestraWebSiteThemeSubscriptionModule } from './theme-subscription/theme-subscription.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -12,6 +13,7 @@ import { HopiestraWebSiteThemeModule } from './theme/theme.module';
         HopiestraWebSiteLanguageModule,
         HopiestraWebSiteInternationalArticleModule,
         HopiestraWebSiteThemeModule,
+        HopiestraWebSiteThemeSubscriptionModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

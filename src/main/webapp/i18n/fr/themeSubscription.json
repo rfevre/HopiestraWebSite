@@ -1,0 +1,24 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "themeSubscription" : {
+            "home": {
+                "title": "ThemeSubscriptions",
+                "createLabel": "Créer un nouveau Theme Subscription",
+                "createOrEditLabel": "Créer ou éditer un Theme Subscription"
+            },
+            "created": "Un nouveau Theme Subscription a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Theme Subscription avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Theme Subscription avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Theme Subscription {{ id }} ?"
+            },
+            "detail": {
+                "title": "Theme Subscription"
+            },
+            "email": "Email",
+            "subscripitonForAll": "Subscripiton For All",
+            "themes": "Themes"
+        }
+    }
+}

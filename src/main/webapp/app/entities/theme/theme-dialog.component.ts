@@ -9,6 +9,7 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { Theme } from './theme.model';
 import { ThemePopupService } from './theme-popup.service';
 import { ThemeService } from './theme.service';
+import { ThemeSubscription, ThemeSubscriptionService } from '../theme-subscription';
 
 @Component({
     selector: 'jhi-theme-dialog',
@@ -21,11 +22,14 @@ export class ThemeDialogComponent implements OnInit {
 
     themes: Theme[];
 
+    themesubscriptions: ThemeSubscription[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private themeService: ThemeService,
+        private themeSubscriptionService: ThemeSubscriptionService,
         private elementRef: ElementRef,
         private eventManager: JhiEventManager
     ) {
@@ -35,6 +39,8 @@ export class ThemeDialogComponent implements OnInit {
         this.isSaving = false;
         this.themeService.query()
             .subscribe((res: HttpResponse<Theme[]>) => { this.themes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.themeSubscriptionService.query()
+            .subscribe((res: HttpResponse<ThemeSubscription[]>) => { this.themesubscriptions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -89,6 +95,21 @@ export class ThemeDialogComponent implements OnInit {
 
     trackThemeById(index: number, item: Theme) {
         return item.id;
+    }
+
+    trackThemeSubscriptionById(index: number, item: ThemeSubscription) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

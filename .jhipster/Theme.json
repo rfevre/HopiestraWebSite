@@ -6,6 +6,13 @@
             "otherEntityName": "theme",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "themeSubscriptions",
+            "otherEntityName": "themeSubscription",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "themes"
         }
     ],
     "fields": [

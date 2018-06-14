@@ -1,5 +1,6 @@
 package com.hopiestra.site.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -40,6 +43,11 @@ public class Theme implements Serializable {
 
     @ManyToOne
     private Theme parentTheme;
+
+    @ManyToMany(mappedBy = "themes")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ThemeSubscription> themeSubscriptions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -113,6 +121,31 @@ public class Theme implements Serializable {
 
     public void setParentTheme(Theme theme) {
         this.parentTheme = theme;
+    }
+
+    public Set<ThemeSubscription> getThemeSubscriptions() {
+        return themeSubscriptions;
+    }
+
+    public Theme themeSubscriptions(Set<ThemeSubscription> themeSubscriptions) {
+        this.themeSubscriptions = themeSubscriptions;
+        return this;
+    }
+
+    public Theme addThemeSubscriptions(ThemeSubscription themeSubscription) {
+        this.themeSubscriptions.add(themeSubscription);
+        themeSubscription.getThemes().add(this);
+        return this;
+    }
+
+    public Theme removeThemeSubscriptions(ThemeSubscription themeSubscription) {
+        this.themeSubscriptions.remove(themeSubscription);
+        themeSubscription.getThemes().remove(this);
+        return this;
+    }
+
+    public void setThemeSubscriptions(Set<ThemeSubscription> themeSubscriptions) {
+        this.themeSubscriptions = themeSubscriptions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
