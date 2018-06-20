@@ -4,6 +4,7 @@ import com.hopiestra.site.HopiestraWebSiteApp;
 
 import com.hopiestra.site.domain.InternationalArticle;
 import com.hopiestra.site.domain.Language;
+import com.hopiestra.site.domain.Article;
 import com.hopiestra.site.repository.InternationalArticleRepository;
 import com.hopiestra.site.service.InternationalArticleService;
 import com.hopiestra.site.web.rest.errors.ExceptionTranslator;
@@ -95,6 +96,11 @@ public class InternationalArticleResourceIntTest {
         em.persist(language);
         em.flush();
         internationalArticle.setLanguage(language);
+        // Add required entity
+        Article article = ArticleResourceIntTest.createEntity(em);
+        em.persist(article);
+        em.flush();
+        internationalArticle.setArticle(article);
         return internationalArticle;
     }
 

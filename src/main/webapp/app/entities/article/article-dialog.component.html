@@ -1,0 +1,100 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myArticleLabel" jhiTranslate="hopiestraWebSiteApp.article.home.createOrEditLabel">Create or edit a Article</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!article.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="article.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture" for="field_backgroundPicture">Background Picture</label>
+            <div>
+                <img [src]="'data:' + article.backgroundPictureContentType + ';base64,' + article.backgroundPicture" style="max-height: 100px;" *ngIf="article.backgroundPicture" alt="article image"/>
+                <div *ngIf="article.backgroundPicture" class="form-text text-danger clearfix">
+                    <span class="pull-left">{{article.backgroundPictureContentType}}, {{byteSize(article.backgroundPicture)}}</span>
+                    <button type="button" (click)="clearInputImage('backgroundPicture', 'backgroundPictureContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_backgroundPicture" (change)="setFileData($event, article, 'backgroundPicture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+            </div>
+            <input type="hidden" class="form-control" name="backgroundPicture" id="field_backgroundPicture"
+                [(ngModel)]="article.backgroundPicture" />
+            <input type="hidden" class="form-control" name="backgroundPictureContentType" id="field_backgroundPictureContentType"
+                [(ngModel)]="article.backgroundPictureContentType" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.publicationDate" for="field_publicationDate">Publication Date</label>
+            <div class="d-flex">
+                <input id="field_publicationDate" type="datetime-local" class="form-control" name="publicationDate" [(ngModel)]="article.publicationDate"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.publicationDate?.dirty && editForm.controls.publicationDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.publicationDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.publicationDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.updateDate" for="field_updateDate">Update Date</label>
+            <div class="d-flex">
+                <input id="field_updateDate" type="datetime-local" class="form-control" name="updateDate" [(ngModel)]="article.updateDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.creationDate" for="field_creationDate">Creation Date</label>
+            <div class="d-flex">
+                <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="article.creationDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.deleteDate" for="field_deleteDate">Delete Date</label>
+            <div class="d-flex">
+                <input id="field_deleteDate" type="datetime-local" class="form-control" name="deleteDate" [(ngModel)]="article.deleteDate"
+                />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.author" for="field_author">Author</label>
+            <select class="form-control" id="field_author" name="author" [(ngModel)]="article.author"  required>
+                <option *ngIf="!editForm.value.author" [ngValue]="null" selected></option>
+                <option [ngValue]="userOption.id === article.author?.id ? article.author : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.author?.dirty && editForm.controls.author?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.author?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.theme" for="field_theme">Theme</label>
+            <select class="form-control" id="field_theme" name="theme" [(ngModel)]="article.theme" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="themeOption.id === article.theme?.id ? article.theme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

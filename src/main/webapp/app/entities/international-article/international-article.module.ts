@@ -2,11 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HopiestraWebSiteSharedModule } from '../../shared';
-
-import 'froala-editor/js/froala_editor.pkgd.min.js';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
-
 import {
     InternationalArticleService,
     InternationalArticlePopupService,
@@ -29,9 +24,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         HopiestraWebSiteSharedModule,
-        RouterModule.forChild(ENTITY_STATES),
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot(),
+        RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
         InternationalArticleComponent,
@@ -40,7 +33,6 @@ const ENTITY_STATES = [
         InternationalArticleDeleteDialogComponent,
         InternationalArticlePopupComponent,
         InternationalArticleDeletePopupComponent,
-        SafeHtmlPipe,
     ],
     entryComponents: [
         InternationalArticleComponent,

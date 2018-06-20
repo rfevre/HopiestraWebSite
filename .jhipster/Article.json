@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "author",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "article"
+        },
+        {
+            "relationshipName": "theme",
+            "otherEntityName": "theme",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "internationalsArticle",
+            "otherEntityName": "internationalArticle",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "article"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "backgroundPicture",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "publicationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "updateDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "deleteDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180620114428",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

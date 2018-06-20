@@ -10,7 +10,7 @@
         </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.content">Content</span></dt>
         <dd>
-            <span [innerHTML]="internationalArticle.content | safeHtml"></span>
+            <span>{{internationalArticle.content}}</span>
         </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.language">Language</span></dt>
         <dd>
@@ -23,6 +23,12 @@
             <span *ngFor="let tags of internationalArticle.tags; let last = last">
                 <a [routerLink]="['/tag', tags?.id ]">{{tags.name}}</a>{{last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.article">Article</span></dt>
+        <dd>
+            <div *ngIf="internationalArticle.article">
+                <a [routerLink]="['/article', internationalArticle.article?.id]">{{internationalArticle.article?.id}}</a>
+            </div>
         </dd>
     </dl>
 

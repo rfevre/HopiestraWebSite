@@ -1,0 +1,57 @@
+
+<div *ngIf="article">
+    <h2><span jhiTranslate="hopiestraWebSiteApp.article.detail.title">Article</span> {{article.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture">Background Picture</span></dt>
+        <dd>
+            <div *ngIf="article.backgroundPicture">
+                <a (click)="openFile(article.backgroundPictureContentType, article.backgroundPicture)">
+                    <img [src]="'data:' + article.backgroundPictureContentType + ';base64,' + article.backgroundPicture" style="max-width: 100%;" alt="article image"/>
+                </a>
+                {{article.backgroundPictureContentType}}, {{byteSize(article.backgroundPicture)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.publicationDate">Publication Date</span></dt>
+        <dd>
+            <span>{{article.publicationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.updateDate">Update Date</span></dt>
+        <dd>
+            <span>{{article.updateDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{article.creationDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.deleteDate">Delete Date</span></dt>
+        <dd>
+            <span>{{article.deleteDate | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.author">Author</span></dt>
+        <dd>
+            {{article.author?.login}}
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.theme">Theme</span></dt>
+        <dd>
+            <div *ngIf="article.theme">
+                <a [routerLink]="['/theme', article.theme?.id]">{{article.theme?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'article/'+ article.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -33,6 +33,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="article_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
@@ -40,12 +44,12 @@
             <column name="tags_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="internationals_article_id" type="bigint">
+            <column name="international_articles_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="internationals_article_id, tags_id" tableName="international_article_tags"/>
+        <addPrimaryKey columnNames="international_articles_id, tags_id" tableName="international_article_tags"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

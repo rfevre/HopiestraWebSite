@@ -42,9 +42,13 @@ public class InternationalArticle implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "international_article_tags",
-               joinColumns = @JoinColumn(name="internationals_article_id", referencedColumnName="id"),
+               joinColumns = @JoinColumn(name="international_articles_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
     private Set<Tag> tags = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @NotNull
+    private Article article;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -117,6 +121,19 @@ public class InternationalArticle implements Serializable {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public InternationalArticle article(Article article) {
+        this.article = article;
+        return this;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

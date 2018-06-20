@@ -2,17 +2,19 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { InternationalArticle } from './international-article.model';
-import { InternationalArticleService } from './international-article.service';
+import { DatePipe } from '@angular/common';
+import { Article } from './article.model';
+import { ArticleService } from './article.service';
 
 @Injectable()
-export class InternationalArticlePopupService {
+export class ArticlePopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
-        private internationalArticleService: InternationalArticleService
+        private articleService: ArticleService
 
     ) {
         this.ngbModalRef = null;
@@ -26,25 +28,33 @@ export class InternationalArticlePopupService {
             }
 
             if (id) {
-                this.internationalArticleService.find(id)
-                    .subscribe((internationalArticleResponse: HttpResponse<InternationalArticle>) => {
-                        const internationalArticle: InternationalArticle = internationalArticleResponse.body;
-                        this.ngbModalRef = this.internationalArticleModalRef(component, internationalArticle);
+                this.articleService.find(id)
+                    .subscribe((articleResponse: HttpResponse<Article>) => {
+                        const article: Article = articleResponse.body;
+                        article.publicationDate = this.datePipe
+                            .transform(article.publicationDate, 'yyyy-MM-ddTHH:mm:ss');
+                        article.updateDate = this.datePipe
+                            .transform(article.updateDate, 'yyyy-MM-ddTHH:mm:ss');
+                        article.creationDate = this.datePipe
+                            .transform(article.creationDate, 'yyyy-MM-ddTHH:mm:ss');
+                        article.deleteDate = this.datePipe
+                            .transform(article.deleteDate, 'yyyy-MM-ddTHH:mm:ss');
+                        this.ngbModalRef = this.articleModalRef(component, article);
                         resolve(this.ngbModalRef);
                     });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.internationalArticleModalRef(component, new InternationalArticle());
+                    this.ngbModalRef = this.articleModalRef(component, new Article());
                     resolve(this.ngbModalRef);
                 }, 0);
             }
         });
     }
 
-    internationalArticleModalRef(component: Component, internationalArticle: InternationalArticle): NgbModalRef {
+    articleModalRef(component: Component, article: Article): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
-        modalRef.componentInstance.internationalArticle = internationalArticle;
+        modalRef.componentInstance.article = article;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
             this.ngbModalRef = null;

@@ -12,6 +12,7 @@
                 "internationalArticle": "International Article",
                 "theme": "Theme",
                 "themeSubscription": "Theme Subscription",
+                "article": "Article",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

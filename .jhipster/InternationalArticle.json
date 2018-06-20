@@ -18,6 +18,15 @@
             "otherEntityField": "name",
             "ownerSide": true,
             "otherEntityRelationshipName": "internationalArticle"
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
         }
     ],
     "fields": [

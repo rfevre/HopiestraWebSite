@@ -1,0 +1,29 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "article" : {
+            "home": {
+                "title": "Articles",
+                "createLabel": "Create a new Article",
+                "createOrEditLabel": "Create or edit a Article"
+            },
+            "created": "A new Article is created with identifier {{ param }}",
+            "updated": "A Article is updated with identifier {{ param }}",
+            "deleted": "A Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Article"
+            },
+            "backgroundPicture": "Background Picture",
+            "publicationDate": "Publication Date",
+            "updateDate": "Update Date",
+            "creationDate": "Creation Date",
+            "deleteDate": "Delete Date",
+            "author": "Author",
+            "theme": "Theme",
+            "internationalsArticle": "Internationals Article"
+        }
+    }
+}

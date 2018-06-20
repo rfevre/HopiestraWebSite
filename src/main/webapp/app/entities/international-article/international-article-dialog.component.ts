@@ -10,8 +10,8 @@ import { InternationalArticle } from './international-article.model';
 import { InternationalArticlePopupService } from './international-article-popup.service';
 import { InternationalArticleService } from './international-article.service';
 import { Language, LanguageService } from '../language';
-
 import { Tag, TagService } from '../tag';
+import { Article, ArticleService } from '../article';
 
 @Component({
     selector: 'jhi-international-article-dialog',
@@ -26,6 +26,8 @@ export class InternationalArticleDialogComponent implements OnInit {
 
     tags: Tag[];
 
+    articles: Article[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
@@ -33,6 +35,7 @@ export class InternationalArticleDialogComponent implements OnInit {
         private internationalArticleService: InternationalArticleService,
         private languageService: LanguageService,
         private tagService: TagService,
+        private articleService: ArticleService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -43,6 +46,8 @@ export class InternationalArticleDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<Language[]>) => { this.languages = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.tagService.query()
             .subscribe((res: HttpResponse<Tag[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.articleService.query()
+            .subscribe((res: HttpResponse<Article[]>) => { this.articles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -96,6 +101,10 @@ export class InternationalArticleDialogComponent implements OnInit {
     }
 
     trackTagById(index: number, item: Tag) {
+        return item.id;
+    }
+
+    trackArticleById(index: number, item: Article) {
         return item.id;
     }
 
