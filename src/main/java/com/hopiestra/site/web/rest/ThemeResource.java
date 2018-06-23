@@ -2,6 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Theme;
+import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.service.ThemeService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -49,6 +51,7 @@ public class ThemeResource {
      */
     @PostMapping("/themes")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Theme> createTheme(@Valid @RequestBody Theme theme) throws URISyntaxException {
         log.debug("REST request to save Theme : {}", theme);
         if (theme.getId() != null) {
@@ -71,6 +74,7 @@ public class ThemeResource {
      */
     @PutMapping("/themes")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Theme> updateTheme(@Valid @RequestBody Theme theme) throws URISyntaxException {
         log.debug("REST request to update Theme : {}", theme);
         if (theme.getId() == null) {
@@ -119,6 +123,7 @@ public class ThemeResource {
      */
     @DeleteMapping("/themes/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteTheme(@PathVariable Long id) {
         log.debug("REST request to delete Theme : {}", id);
         themeService.delete(id);

@@ -2,6 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Article;
+import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.service.ArticleService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -49,6 +51,7 @@ public class ArticleResource {
      */
     @PostMapping("/articles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Article> createArticle(@Valid @RequestBody Article article) throws URISyntaxException {
         log.debug("REST request to save Article : {}", article);
         if (article.getId() != null) {
@@ -71,6 +74,7 @@ public class ArticleResource {
      */
     @PutMapping("/articles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Article> updateArticle(@Valid @RequestBody Article article) throws URISyntaxException {
         log.debug("REST request to update Article : {}", article);
         if (article.getId() == null) {
@@ -119,6 +123,7 @@ public class ArticleResource {
      */
     @DeleteMapping("/articles/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         log.debug("REST request to delete Article : {}", id);
         articleService.delete(id);

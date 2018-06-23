@@ -2,6 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.InternationalArticle;
+import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.service.InternationalArticleService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -49,6 +51,7 @@ public class InternationalArticleResource {
      */
     @PostMapping("/international-articles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<InternationalArticle> createInternationalArticle(@Valid @RequestBody InternationalArticle internationalArticle) throws URISyntaxException {
         log.debug("REST request to save InternationalArticle : {}", internationalArticle);
         if (internationalArticle.getId() != null) {
@@ -71,6 +74,7 @@ public class InternationalArticleResource {
      */
     @PutMapping("/international-articles")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<InternationalArticle> updateInternationalArticle(@Valid @RequestBody InternationalArticle internationalArticle) throws URISyntaxException {
         log.debug("REST request to update InternationalArticle : {}", internationalArticle);
         if (internationalArticle.getId() == null) {
@@ -119,6 +123,7 @@ public class InternationalArticleResource {
      */
     @DeleteMapping("/international-articles/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteInternationalArticle(@PathVariable Long id) {
         log.debug("REST request to delete InternationalArticle : {}", id);
         internationalArticleService.delete(id);

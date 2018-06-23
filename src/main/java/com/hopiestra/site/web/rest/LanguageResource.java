@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Language;
 
 import com.hopiestra.site.repository.LanguageRepository;
+import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
 import com.hopiestra.site.web.rest.util.PaginationUtil;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -50,6 +52,7 @@ public class LanguageResource {
      */
     @PostMapping("/languages")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Language> createLanguage(@Valid @RequestBody Language language) throws URISyntaxException {
         log.debug("REST request to save Language : {}", language);
         if (language.getId() != null) {
@@ -72,6 +75,7 @@ public class LanguageResource {
      */
     @PutMapping("/languages")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Language> updateLanguage(@Valid @RequestBody Language language) throws URISyntaxException {
         log.debug("REST request to update Language : {}", language);
         if (language.getId() == null) {
@@ -120,6 +124,7 @@ public class LanguageResource {
      */
     @DeleteMapping("/languages/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteLanguage(@PathVariable Long id) {
         log.debug("REST request to delete Language : {}", id);
         languageRepository.delete(id);

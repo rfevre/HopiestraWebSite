@@ -1,7 +1,9 @@
 <div>
     <h2>
         <span jhiTranslate="hopiestraWebSiteApp.themeSubscription.home.title">Theme Subscriptions</span>
-        <button class="btn btn-primary float-right jh-create-entity create-theme-subscription" [routerLink]="['/', { outlets: { popup: ['theme-subscription-new'] } }]">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                class="btn btn-primary float-right jh-create-entity create-theme-subscription" 
+                [routerLink]="['/', { outlets: { popup: ['theme-subscription-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="hopiestraWebSiteApp.themeSubscription.home.createLabel">
             Create new Theme Subscription

@@ -2,6 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.ThemeSubscription;
+import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.service.ThemeSubscriptionService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -90,6 +92,7 @@ public class ThemeSubscriptionResource {
      */
     @GetMapping("/theme-subscriptions")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<ThemeSubscription>> getAllThemeSubscriptions(Pageable pageable) {
         log.debug("REST request to get a page of ThemeSubscriptions");
         Page<ThemeSubscription> page = themeSubscriptionService.findAll(pageable);
@@ -119,6 +122,7 @@ public class ThemeSubscriptionResource {
      */
     @DeleteMapping("/theme-subscriptions/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteThemeSubscription(@PathVariable Long id) {
         log.debug("REST request to delete ThemeSubscription : {}", id);
         themeSubscriptionService.delete(id);
