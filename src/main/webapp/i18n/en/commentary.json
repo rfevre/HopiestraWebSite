@@ -1,0 +1,24 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "commentary" : {
+            "home": {
+                "title": "Commentaries",
+                "createLabel": "Create a new Commentary",
+                "createOrEditLabel": "Create or edit a Commentary"
+            },
+            "created": "A new Commentary is created with identifier {{ param }}",
+            "updated": "A Commentary is updated with identifier {{ param }}",
+            "deleted": "A Commentary is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Commentary {{ id }}?"
+            },
+            "detail": {
+                "title": "Commentary"
+            },
+            "content": "Content",
+            "author": "Author",
+            "article": "Article"
+        }
+    }
+}

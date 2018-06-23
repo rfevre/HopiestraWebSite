@@ -1,0 +1,24 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "commentary" : {
+            "home": {
+                "title": "Commentaries",
+                "createLabel": "Créer un nouveau Commentary",
+                "createOrEditLabel": "Créer ou éditer un Commentary"
+            },
+            "created": "Un nouveau Commentary a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Commentary avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Commentary avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Commentary {{ id }} ?"
+            },
+            "detail": {
+                "title": "Commentary"
+            },
+            "content": "Content",
+            "author": "Author",
+            "article": "Article"
+        }
+    }
+}

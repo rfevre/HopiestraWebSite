@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "author",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "commentary"
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "adminTitle"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "content",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180623173227",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "commentary",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

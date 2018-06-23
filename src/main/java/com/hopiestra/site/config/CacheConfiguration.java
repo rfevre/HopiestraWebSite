@@ -53,6 +53,7 @@ public class CacheConfiguration {
             cm.createCache(com.hopiestra.site.domain.Theme.class.getName() + ".themeSubscriptions", jcacheConfiguration);
             cm.createCache(com.hopiestra.site.domain.Article.class.getName(), jcacheConfiguration);
             cm.createCache(com.hopiestra.site.domain.Article.class.getName() + ".internationalsArticles", jcacheConfiguration);
+            cm.createCache(com.hopiestra.site.domain.Commentary.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
