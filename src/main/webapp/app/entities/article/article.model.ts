@@ -9,6 +9,7 @@ export class Article implements BaseEntity {
         public updateDate?: any,
         public creationDate?: any,
         public deleteDate?: any,
+        public adminTitle?: string,
         public author?: User,
         public theme?: BaseEntity,
         public internationalsArticles?: BaseEntity[],

@@ -19,6 +19,7 @@
                                  constraintName="fk_international_article_tags_international_articles_id"
                                  referencedColumnNames="id"
                                  referencedTableName="international_article"/>
+
         <addForeignKeyConstraint baseColumnNames="tags_id"
                                  baseTableName="international_article_tags"
                                  constraintName="fk_international_article_tags_tags_id"

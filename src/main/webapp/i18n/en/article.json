@@ -21,6 +21,7 @@
             "updateDate": "Update Date",
             "creationDate": "Creation Date",
             "deleteDate": "Delete Date",
+            "adminTitle": "Admin Title",
             "author": "Author",
             "theme": "Theme",
             "internationalsArticle": "Internationals Article"

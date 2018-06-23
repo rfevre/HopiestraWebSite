@@ -29,6 +29,10 @@
         <dd>
             <span>{{article.deleteDate | date:'medium'}}</span>
         </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.adminTitle">Admin Title</span></dt>
+        <dd>
+            <span>{{article.adminTitle}}</span>
+        </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.article.author">Author</span></dt>
         <dd>
             {{article.author?.login}}

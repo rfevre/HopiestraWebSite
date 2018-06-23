@@ -50,6 +50,13 @@
         {
             "fieldName": "deleteDate",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "adminTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180620114428",

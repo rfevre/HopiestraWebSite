@@ -27,7 +27,7 @@
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.article">Article</span></dt>
         <dd>
             <div *ngIf="internationalArticle.article">
-                <a [routerLink]="['/article', internationalArticle.article?.id]">{{internationalArticle.article?.id}}</a>
+                <a [routerLink]="['/article', internationalArticle.article?.id]">{{internationalArticle.article?.adminTitle}}</a>
             </div>
         </dd>
     </dl>

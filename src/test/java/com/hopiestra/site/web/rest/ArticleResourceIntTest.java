@@ -60,6 +60,9 @@ public class ArticleResourceIntTest {
     private static final Instant DEFAULT_DELETE_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DELETE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final String DEFAULT_ADMIN_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_ADMIN_TITLE = "BBBBBBBBBB";
+
     @Autowired
     private ArticleRepository articleRepository;
 
@@ -106,7 +109,8 @@ public class ArticleResourceIntTest {
             .publicationDate(DEFAULT_PUBLICATION_DATE)
             .updateDate(DEFAULT_UPDATE_DATE)
             .creationDate(DEFAULT_CREATION_DATE)
-            .deleteDate(DEFAULT_DELETE_DATE);
+            .deleteDate(DEFAULT_DELETE_DATE)
+            .adminTitle(DEFAULT_ADMIN_TITLE);
         // Add required entity
         User author = UserResourceIntTest.createEntity(em);
         em.persist(author);
@@ -141,6 +145,7 @@ public class ArticleResourceIntTest {
         assertThat(testArticle.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
         assertThat(testArticle.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testArticle.getDeleteDate()).isEqualTo(DEFAULT_DELETE_DATE);
+        assertThat(testArticle.getAdminTitle()).isEqualTo(DEFAULT_ADMIN_TITLE);
     }
 
     @Test
@@ -182,6 +187,24 @@ public class ArticleResourceIntTest {
 
     @Test
     @Transactional
+    public void checkAdminTitleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = articleRepository.findAll().size();
+        // set the field null
+        article.setAdminTitle(null);
+
+        // Create the Article, which fails.
+
+        restArticleMockMvc.perform(post("/api/articles")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(article)))
+            .andExpect(status().isBadRequest());
+
+        List<Article> articleList = articleRepository.findAll();
+        assertThat(articleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllArticles() throws Exception {
         // Initialize the database
         articleRepository.saveAndFlush(article);
@@ -196,7 +219,8 @@ public class ArticleResourceIntTest {
             .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
-            .andExpect(jsonPath("$.[*].deleteDate").value(hasItem(DEFAULT_DELETE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].deleteDate").value(hasItem(DEFAULT_DELETE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].adminTitle").value(hasItem(DEFAULT_ADMIN_TITLE.toString())));
     }
 
     @Test
@@ -215,7 +239,8 @@ public class ArticleResourceIntTest {
             .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()))
             .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
-            .andExpect(jsonPath("$.deleteDate").value(DEFAULT_DELETE_DATE.toString()));
+            .andExpect(jsonPath("$.deleteDate").value(DEFAULT_DELETE_DATE.toString()))
+            .andExpect(jsonPath("$.adminTitle").value(DEFAULT_ADMIN_TITLE.toString()));
     }
 
     @Test
@@ -244,7 +269,8 @@ public class ArticleResourceIntTest {
             .publicationDate(UPDATED_PUBLICATION_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
             .creationDate(UPDATED_CREATION_DATE)
-            .deleteDate(UPDATED_DELETE_DATE);
+            .deleteDate(UPDATED_DELETE_DATE)
+            .adminTitle(UPDATED_ADMIN_TITLE);
 
         restArticleMockMvc.perform(put("/api/articles")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -261,6 +287,7 @@ public class ArticleResourceIntTest {
         assertThat(testArticle.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
         assertThat(testArticle.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testArticle.getDeleteDate()).isEqualTo(UPDATED_DELETE_DATE);
+        assertThat(testArticle.getAdminTitle()).isEqualTo(UPDATED_ADMIN_TITLE);
     }
 
     @Test

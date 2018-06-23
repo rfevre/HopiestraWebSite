@@ -48,6 +48,10 @@ public class Article implements Serializable {
     @Column(name = "delete_date")
     private Instant deleteDate;
 
+    @NotNull
+    @Column(name = "admin_title", nullable = false, unique = true)
+    private String adminTitle;
+
     @ManyToOne(optional = false)
     @NotNull
     private User author;
@@ -147,6 +151,19 @@ public class Article implements Serializable {
         this.deleteDate = deleteDate;
     }
 
+    public String getAdminTitle() {
+        return adminTitle;
+    }
+
+    public Article adminTitle(String adminTitle) {
+        this.adminTitle = adminTitle;
+        return this;
+    }
+
+    public void setAdminTitle(String adminTitle) {
+        this.adminTitle = adminTitle;
+    }
+
     public User getAuthor() {
         return author;
     }
@@ -229,6 +246,7 @@ public class Article implements Serializable {
             ", updateDate='" + getUpdateDate() + "'" +
             ", creationDate='" + getCreationDate() + "'" +
             ", deleteDate='" + getDeleteDate() + "'" +
+            ", adminTitle='" + getAdminTitle() + "'" +
             "}";
     }
 }

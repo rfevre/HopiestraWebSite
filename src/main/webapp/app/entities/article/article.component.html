@@ -22,6 +22,7 @@
             <th jhiSortBy="updateDate"><span jhiTranslate="hopiestraWebSiteApp.article.updateDate">Update Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="creationDate"><span jhiTranslate="hopiestraWebSiteApp.article.creationDate">Creation Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="deleteDate"><span jhiTranslate="hopiestraWebSiteApp.article.deleteDate">Delete Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="adminTitle"><span jhiTranslate="hopiestraWebSiteApp.article.adminTitle">Admin Title</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="author.login"><span jhiTranslate="hopiestraWebSiteApp.article.author">Author</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="theme.name"><span jhiTranslate="hopiestraWebSiteApp.article.theme">Theme</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -40,6 +41,7 @@
                 <td>{{article.updateDate | date:'medium'}}</td>
                 <td>{{article.creationDate | date:'medium'}}</td>
                 <td>{{article.deleteDate | date:'medium'}}</td>
+                <td>{{article.adminTitle}}</td>
                 <td>
                     {{article.author?.login}}
                 </td>
