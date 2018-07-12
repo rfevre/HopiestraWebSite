@@ -34,7 +34,7 @@ public class Tag implements Serializable {
     @ManyToMany(mappedBy = "tags")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<InternationalArticle> internationalsArticle = new HashSet<>();
+    private Set<Article> articles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,29 +58,29 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public Set<InternationalArticle> getInternationalsArticle() {
-        return internationalsArticle;
+    public Set<Article> getArticles() {
+        return articles;
     }
 
-    public Tag internationalsArticle(Set<InternationalArticle> internationalsArticle) {
-        this.internationalsArticle = internationalsArticle;
+    public Tag articles(Set<Article> articles) {
+        this.articles = articles;
         return this;
     }
 
-    public Tag addInternationalsArticle(InternationalArticle internationalArticle) {
-        this.internationalsArticle.add(internationalArticle);
-        internationalArticle.getTags().add(this);
+    public Tag addArticles(Article article) {
+        this.articles.add(article);
+        article.getTags().add(this);
         return this;
     }
 
-    public Tag removeInternationalsArticle(InternationalArticle internationalArticle) {
-        this.internationalsArticle.remove(internationalArticle);
-        internationalArticle.getTags().remove(this);
+    public Tag removeArticles(Article article) {
+        this.articles.remove(article);
+        article.getTags().remove(this);
         return this;
     }
 
-    public void setInternationalsArticle(Set<InternationalArticle> internationalsArticle) {
-        this.internationalsArticle = internationalsArticle;
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

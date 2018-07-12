@@ -18,16 +18,10 @@
                 <a [routerLink]="['/language', internationalArticle.language?.id]">{{internationalArticle.language?.name}}</a>
             </div>
         </dd>
-        <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.tags">Tags</span></dt>
-        <dd>
-            <span *ngFor="let tags of internationalArticle.tags; let last = last">
-                <a [routerLink]="['/tag', tags?.id ]">{{tags.name}}</a>{{last ? '' : ', '}}
-            </span>
-        </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.article">Article</span></dt>
         <dd>
             <div *ngIf="internationalArticle.article">
-                <a [routerLink]="['/article', internationalArticle.article?.id]">{{internationalArticle.article?.adminTitle}}</a>
+                <a [routerLink]="['/article', internationalArticle.article?.id]">{{internationalArticle.article?.id}}</a>
             </div>
         </dd>
     </dl>

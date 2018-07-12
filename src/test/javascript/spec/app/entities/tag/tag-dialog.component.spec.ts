@@ -9,7 +9,7 @@ import { HopiestraWebSiteTestModule } from '../../../test.module';
 import { TagDialogComponent } from '../../../../../../main/webapp/app/entities/tag/tag-dialog.component';
 import { TagService } from '../../../../../../main/webapp/app/entities/tag/tag.service';
 import { Tag } from '../../../../../../main/webapp/app/entities/tag/tag.model';
-import { InternationalArticleService } from '../../../../../../main/webapp/app/entities/international-article';
+import { ArticleService } from '../../../../../../main/webapp/app/entities/article';
 
 describe('Component Tests', () => {
 
@@ -25,7 +25,7 @@ describe('Component Tests', () => {
                 imports: [HopiestraWebSiteTestModule],
                 declarations: [TagDialogComponent],
                 providers: [
-                    InternationalArticleService,
+                    ArticleService,
                     TagService
                 ]
             })

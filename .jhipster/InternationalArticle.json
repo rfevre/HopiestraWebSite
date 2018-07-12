@@ -11,15 +11,6 @@
             "otherEntityField": "name"
         },
         {
-            "relationshipName": "tags",
-            "otherEntityName": "tag",
-            "relationshipType": "many-to-many",
-            "relationshipValidateRules": [],
-            "otherEntityField": "name",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "internationalArticle"
-        },
-        {
             "relationshipName": "article",
             "otherEntityName": "article",
             "relationshipType": "many-to-one",

@@ -49,7 +49,7 @@ public class Article implements Serializable {
     private Instant deleteDate;
 
     @NotNull
-    @Column(name = "admin_title", nullable = false, unique = true)
+    @Column(name = "admin_title", nullable = false)
     private String adminTitle;
 
     @ManyToOne(optional = false)
@@ -63,6 +63,13 @@ public class Article implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<InternationalArticle> internationalsArticles = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "article_tags",
+               joinColumns = @JoinColumn(name="articles_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
+    private Set<Tag> tags = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -213,6 +220,31 @@ public class Article implements Serializable {
 
     public void setInternationalsArticles(Set<InternationalArticle> internationalArticles) {
         this.internationalsArticles = internationalArticles;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public Article tags(Set<Tag> tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    public Article addTags(Tag tag) {
+        this.tags.add(tag);
+        tag.getArticles().add(this);
+        return this;
+    }
+
+    public Article removeTags(Tag tag) {
+        this.tags.remove(tag);
+        tag.getArticles().remove(this);
+        return this;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

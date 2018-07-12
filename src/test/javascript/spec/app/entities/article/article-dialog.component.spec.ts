@@ -11,6 +11,7 @@ import { ArticleService } from '../../../../../../main/webapp/app/entities/artic
 import { Article } from '../../../../../../main/webapp/app/entities/article/article.model';
 import { UserService } from '../../../../../../main/webapp/app/shared';
 import { ThemeService } from '../../../../../../main/webapp/app/entities/theme';
+import { TagService } from '../../../../../../main/webapp/app/entities/tag';
 
 describe('Component Tests', () => {
 
@@ -28,6 +29,7 @@ describe('Component Tests', () => {
                 providers: [
                     UserService,
                     ThemeService,
+                    TagService,
                     ArticleService
                 ]
             })

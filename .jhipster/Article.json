@@ -23,6 +23,15 @@
             "otherEntityName": "internationalArticle",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "article"
+        },
+        {
+            "relationshipName": "tags",
+            "otherEntityName": "tag",
+            "relationshipType": "many-to-many",
+            "relationshipValidateRules": [],
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "articles"
         }
     ],
     "fields": [

@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Nabot (generated)" id="1531424500948-1">
+        <createTable tableName="article_tags">
+            <column name="articles_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tags_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-2">
+        <addPrimaryKey columnNames="articles_id, tags_id" tableName="article_tags"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-3">
+        <addForeignKeyConstraint baseColumnNames="articles_id" baseTableName="article_tags" constraintName="FKhd7fyhyhf5bpbgw8rri8j3grv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-4">
+        <addForeignKeyConstraint baseColumnNames="tags_id" baseTableName="article_tags" constraintName="FKp6owh2p5p9yllwwrc2hn7bnxr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tag"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-5">
+        <dropForeignKeyConstraint baseTableName="international_article_tags" constraintName="fk_international_article_tags_international_articles_id"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-6">
+        <dropForeignKeyConstraint baseTableName="international_article_tags" constraintName="fk_international_article_tags_tags_id"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-7">
+        <dropUniqueConstraint constraintName="jhi_social_user_connection_user_id_provider_id_provider_use_key" tableName="jhi_social_user_connection"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-8">
+        <dropUniqueConstraint constraintName="jhi_social_user_connection_user_id_provider_id_rank_key" tableName="jhi_social_user_connection"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-9">
+        <dropUniqueConstraint constraintName="uk_article_admin_title" tableName="article"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1531424500948-10">
+        <dropTable tableName="international_article_tags"/>
+    </changeSet>
+</databaseChangeLog>

@@ -24,7 +24,8 @@
             "adminTitle": "Admin Title",
             "author": "Author",
             "theme": "Theme",
-            "internationalsArticle": "Internationals Article"
+            "internationalsArticle": "Internationals Article",
+            "tags": "Tags"
         }
     }
 }

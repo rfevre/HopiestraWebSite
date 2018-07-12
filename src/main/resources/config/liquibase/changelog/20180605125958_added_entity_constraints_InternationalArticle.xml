@@ -14,18 +14,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="language"/>
 
-        <addForeignKeyConstraint baseColumnNames="international_articles_id"
-                                 baseTableName="international_article_tags"
-                                 constraintName="fk_international_article_tags_international_articles_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="international_article"/>
-
-        <addForeignKeyConstraint baseColumnNames="tags_id"
-                                 baseTableName="international_article_tags"
-                                 constraintName="fk_international_article_tags_tags_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tag"/>
-        
         <addForeignKeyConstraint baseColumnNames="article_id"
                                  baseTableName="international_article"
                                  constraintName="fk_international_article_article_id"

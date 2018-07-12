@@ -43,6 +43,12 @@
                 <a [routerLink]="['/theme', article.theme?.id]">{{article.theme?.name}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.tags">Tags</span></dt>
+        <dd>
+            <span *ngFor="let tags of article.tags; let last = last">
+                <a [routerLink]="['/tag', tags?.id ]">{{tags.name}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"

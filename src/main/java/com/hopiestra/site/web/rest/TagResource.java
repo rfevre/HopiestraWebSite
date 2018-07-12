@@ -4,7 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Tag;
 
 import com.hopiestra.site.repository.TagRepository;
-import com.hopiestra.site.security.AuthoritiesConstants;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
 import com.hopiestra.site.web.rest.util.PaginationUtil;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -52,7 +50,6 @@ public class TagResource {
      */
     @PostMapping("/tags")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Tag> createTag(@Valid @RequestBody Tag tag) throws URISyntaxException {
         log.debug("REST request to save Tag : {}", tag);
         if (tag.getId() != null) {
@@ -75,7 +72,6 @@ public class TagResource {
      */
     @PutMapping("/tags")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Tag> updateTag(@Valid @RequestBody Tag tag) throws URISyntaxException {
         log.debug("REST request to update Tag : {}", tag);
         if (tag.getId() == null) {
@@ -124,7 +120,6 @@ public class TagResource {
      */
     @DeleteMapping("/tags/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
         log.debug("REST request to delete Tag : {}", id);
         tagRepository.delete(id);

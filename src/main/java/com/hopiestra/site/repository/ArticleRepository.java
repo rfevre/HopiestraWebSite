@@ -4,6 +4,7 @@ import com.hopiestra.site.domain.Article;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 /**
@@ -15,5 +16,10 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("select article from Article article where article.author.login = ?#{principal.username}")
     List<Article> findByAuthorIsCurrentUser();
+    @Query("select distinct article from Article article left join fetch article.tags")
+    List<Article> findAllWithEagerRelationships();
+
+    @Query("select article from Article article left join fetch article.tags where article.id =:id")
+    Article findOneWithEagerRelationships(@Param("id") Long id);
 
 }

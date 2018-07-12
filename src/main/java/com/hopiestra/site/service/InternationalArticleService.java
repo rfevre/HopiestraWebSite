@@ -57,7 +57,7 @@ public class InternationalArticleService {
     @Transactional(readOnly = true)
     public InternationalArticle findOne(Long id) {
         log.debug("Request to get InternationalArticle : {}", id);
-        return internationalArticleRepository.findOneWithEagerRelationships(id);
+        return internationalArticleRepository.findOne(id);
     }
 
     /**

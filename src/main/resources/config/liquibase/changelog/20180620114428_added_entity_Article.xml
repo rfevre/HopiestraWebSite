@@ -45,7 +45,7 @@
             </column>
 
             <column name="admin_title" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="uk_article_admin_title" />
+                <constraints nullable="false" />
             </column>
 
             <column name="author_id" type="bigint">
@@ -62,6 +62,17 @@
         <dropDefaultValue tableName="article" columnName="update_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="article" columnName="creation_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="article" columnName="delete_date" columnDataType="datetime"/>
+        
+        <createTable tableName="article_tags">
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="articles_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="articles_id, tags_id" tableName="article_tags"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

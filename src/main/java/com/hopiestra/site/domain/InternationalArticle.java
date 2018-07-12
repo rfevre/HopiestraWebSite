@@ -7,8 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -38,13 +36,6 @@ public class InternationalArticle implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     private Language language;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "international_article_tags",
-               joinColumns = @JoinColumn(name="international_articles_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
-    private Set<Tag> tags = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -96,31 +87,6 @@ public class InternationalArticle implements Serializable {
 
     public void setLanguage(Language language) {
         this.language = language;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public InternationalArticle tags(Set<Tag> tags) {
-        this.tags = tags;
-        return this;
-    }
-
-    public InternationalArticle addTags(Tag tag) {
-        this.tags.add(tag);
-        tag.getInternationalsArticle().add(this);
-        return this;
-    }
-
-    public InternationalArticle removeTags(Tag tag) {
-        this.tags.remove(tag);
-        tag.getInternationalsArticle().remove(this);
-        return this;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
     }
 
     public Article getArticle() {

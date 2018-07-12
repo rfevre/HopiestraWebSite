@@ -2,8 +2,8 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "internationalsArticle",
-            "otherEntityName": "internationalArticle",
+            "relationshipName": "articles",
+            "otherEntityName": "article",
             "relationshipType": "many-to-many",
             "ownerSide": false,
             "otherEntityRelationshipName": "tags"

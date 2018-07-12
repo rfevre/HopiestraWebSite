@@ -10,7 +10,6 @@ import { InternationalArticle } from './international-article.model';
 import { InternationalArticlePopupService } from './international-article-popup.service';
 import { InternationalArticleService } from './international-article.service';
 import { Language, LanguageService } from '../language';
-import { Tag, TagService } from '../tag';
 import { Article, ArticleService } from '../article';
 
 @Component({
@@ -24,8 +23,6 @@ export class InternationalArticleDialogComponent implements OnInit {
 
     languages: Language[];
 
-    tags: Tag[];
-
     articles: Article[];
 
     constructor(
@@ -34,7 +31,6 @@ export class InternationalArticleDialogComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private internationalArticleService: InternationalArticleService,
         private languageService: LanguageService,
-        private tagService: TagService,
         private articleService: ArticleService,
         private eventManager: JhiEventManager
     ) {
@@ -44,8 +40,6 @@ export class InternationalArticleDialogComponent implements OnInit {
         this.isSaving = false;
         this.languageService.query()
             .subscribe((res: HttpResponse<Language[]>) => { this.languages = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.tagService.query()
-            .subscribe((res: HttpResponse<Tag[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.articleService.query()
             .subscribe((res: HttpResponse<Article[]>) => { this.articles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
@@ -100,23 +94,8 @@ export class InternationalArticleDialogComponent implements OnInit {
         return item.id;
     }
 
-    trackTagById(index: number, item: Tag) {
-        return item.id;
-    }
-
     trackArticleById(index: number, item: Article) {
         return item.id;
-    }
-
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
     }
 }
 

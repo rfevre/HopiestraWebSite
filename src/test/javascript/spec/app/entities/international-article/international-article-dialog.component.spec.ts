@@ -10,7 +10,6 @@ import { InternationalArticleDialogComponent } from '../../../../../../main/weba
 import { InternationalArticleService } from '../../../../../../main/webapp/app/entities/international-article/international-article.service';
 import { InternationalArticle } from '../../../../../../main/webapp/app/entities/international-article/international-article.model';
 import { LanguageService } from '../../../../../../main/webapp/app/entities/language';
-import { TagService } from '../../../../../../main/webapp/app/entities/tag';
 import { ArticleService } from '../../../../../../main/webapp/app/entities/article';
 
 describe('Component Tests', () => {
@@ -28,7 +27,6 @@ describe('Component Tests', () => {
                 declarations: [InternationalArticleDialogComponent],
                 providers: [
                     LanguageService,
-                    TagService,
                     ArticleService,
                     InternationalArticleService
                 ]

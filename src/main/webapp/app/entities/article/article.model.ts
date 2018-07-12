@@ -13,6 +13,7 @@ export class Article implements BaseEntity {
         public author?: User,
         public theme?: BaseEntity,
         public internationalsArticles?: BaseEntity[],
+        public tags?: BaseEntity[],
     ) {
     }
 }

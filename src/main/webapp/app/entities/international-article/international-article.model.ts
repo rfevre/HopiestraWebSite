@@ -6,7 +6,6 @@ export class InternationalArticle implements BaseEntity {
         public title?: string,
         public content?: any,
         public language?: BaseEntity,
-        public tags?: BaseEntity[],
         public article?: BaseEntity,
     ) {
     }

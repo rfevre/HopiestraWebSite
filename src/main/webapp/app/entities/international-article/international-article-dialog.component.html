@@ -49,16 +49,10 @@
             </small>
         </div>
         <div class="form-group">
-            <label jhiTranslate="hopiestraWebSiteApp.internationalArticle.tags" for="field_tags">Tags</label>
-            <select class="form-control" id="field_tags" multiple name="tags" [(ngModel)]="internationalArticle.tags">
-                <option [ngValue]="getSelected(internationalArticle.tags, tagOption)" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.internationalArticle.article" for="field_article">Article</label>
             <select class="form-control" id="field_article" name="article" [(ngModel)]="internationalArticle.article"  required>
                 <option *ngIf="!editForm.value.article" [ngValue]="null" selected></option>
-                <option [ngValue]="articleOption.id === internationalArticle.article?.id ? internationalArticle.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.adminTitle}}</option>
+                <option [ngValue]="articleOption.id === internationalArticle.article?.id ? internationalArticle.article : articleOption" *ngFor="let articleOption of articles; trackBy: trackArticleById">{{articleOption.id}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.article?.dirty && editForm.controls.article?.invalid)">

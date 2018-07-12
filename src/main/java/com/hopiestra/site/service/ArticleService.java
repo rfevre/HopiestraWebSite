@@ -2,9 +2,6 @@ package com.hopiestra.site.service;
 
 import com.hopiestra.site.domain.Article;
 import com.hopiestra.site.repository.ArticleRepository;
-
-import java.time.Instant;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,12 +33,6 @@ public class ArticleService {
      */
     public Article save(Article article) {
         log.debug("Request to save Article : {}", article);
-        
-        if(article.getId() == null) {
-        	article.creationDate(Instant.now());
-        }
-        article.updateDate(Instant.now());
-        
         return articleRepository.save(article);
     }
 
@@ -66,7 +57,7 @@ public class ArticleService {
     @Transactional(readOnly = true)
     public Article findOne(Long id) {
         log.debug("Request to get Article : {}", id);
-        return articleRepository.findOne(id);
+        return articleRepository.findOneWithEagerRelationships(id);
     }
 
     /**

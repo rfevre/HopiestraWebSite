@@ -11,6 +11,7 @@ import { ArticlePopupService } from './article-popup.service';
 import { ArticleService } from './article.service';
 import { User, UserService } from '../../shared';
 import { Theme, ThemeService } from '../theme';
+import { Tag, TagService } from '../tag';
 
 @Component({
     selector: 'jhi-article-dialog',
@@ -25,6 +26,8 @@ export class ArticleDialogComponent implements OnInit {
 
     themes: Theme[];
 
+    tags: Tag[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private dataUtils: JhiDataUtils,
@@ -32,6 +35,7 @@ export class ArticleDialogComponent implements OnInit {
         private articleService: ArticleService,
         private userService: UserService,
         private themeService: ThemeService,
+        private tagService: TagService,
         private elementRef: ElementRef,
         private eventManager: JhiEventManager
     ) {
@@ -43,6 +47,8 @@ export class ArticleDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<User[]>) => { this.users = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.themeService.query()
             .subscribe((res: HttpResponse<Theme[]>) => { this.themes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.tagService.query()
+            .subscribe((res: HttpResponse<Tag[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -101,6 +107,21 @@ export class ArticleDialogComponent implements OnInit {
 
     trackThemeById(index: number, item: Theme) {
         return item.id;
+    }
+
+    trackTagById(index: number, item: Tag) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 }
 

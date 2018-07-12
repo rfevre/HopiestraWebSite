@@ -40,17 +40,6 @@
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         
-        <createTable tableName="international_article_tags">
-            <column name="tags_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="international_articles_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="international_articles_id, tags_id" tableName="international_article_tags"/>
-        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
