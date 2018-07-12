@@ -28,13 +28,20 @@ public class Tag implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
 
     @ManyToMany(mappedBy = "tags")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Article> articles = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "tag_international_tags",
+               joinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"),
+               inverseJoinColumns = @JoinColumn(name="international_tags_id", referencedColumnName="id"))
+    private Set<InternationalTag> internationalTags = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -45,17 +52,17 @@ public class Tag implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public Tag name(String name) {
-        this.name = name;
+    public Tag code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Set<Article> getArticles() {
@@ -81,6 +88,31 @@ public class Tag implements Serializable {
 
     public void setArticles(Set<Article> articles) {
         this.articles = articles;
+    }
+
+    public Set<InternationalTag> getInternationalTags() {
+        return internationalTags;
+    }
+
+    public Tag internationalTags(Set<InternationalTag> internationalTags) {
+        this.internationalTags = internationalTags;
+        return this;
+    }
+
+    public Tag addInternationalTags(InternationalTag internationalTag) {
+        this.internationalTags.add(internationalTag);
+        internationalTag.getTags().add(this);
+        return this;
+    }
+
+    public Tag removeInternationalTags(InternationalTag internationalTag) {
+        this.internationalTags.remove(internationalTag);
+        internationalTag.getTags().remove(this);
+        return this;
+    }
+
+    public void setInternationalTags(Set<InternationalTag> internationalTags) {
+        this.internationalTags = internationalTags;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -108,7 +140,7 @@ public class Tag implements Serializable {
     public String toString() {
         return "Tag{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
+            ", code='" + getCode() + "'" +
             "}";
     }
 }

@@ -25,11 +25,11 @@ public class Language implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
-    @Column(name = "code", nullable = false, unique = true)
+    @Column(name = "code", nullable = false)
     private String code;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

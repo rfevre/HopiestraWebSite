@@ -2,9 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Language;
-
-import com.hopiestra.site.repository.LanguageRepository;
-import com.hopiestra.site.security.AuthoritiesConstants;
+import com.hopiestra.site.service.LanguageService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
 import com.hopiestra.site.web.rest.util.PaginationUtil;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,10 +34,10 @@ public class LanguageResource {
 
     private static final String ENTITY_NAME = "language";
 
-    private final LanguageRepository languageRepository;
+    private final LanguageService languageService;
 
-    public LanguageResource(LanguageRepository languageRepository) {
-        this.languageRepository = languageRepository;
+    public LanguageResource(LanguageService languageService) {
+        this.languageService = languageService;
     }
 
     /**
@@ -52,13 +49,12 @@ public class LanguageResource {
      */
     @PostMapping("/languages")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Language> createLanguage(@Valid @RequestBody Language language) throws URISyntaxException {
         log.debug("REST request to save Language : {}", language);
         if (language.getId() != null) {
             throw new BadRequestAlertException("A new language cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Language result = languageRepository.save(language);
+        Language result = languageService.save(language);
         return ResponseEntity.created(new URI("/api/languages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,13 +71,12 @@ public class LanguageResource {
      */
     @PutMapping("/languages")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Language> updateLanguage(@Valid @RequestBody Language language) throws URISyntaxException {
         log.debug("REST request to update Language : {}", language);
         if (language.getId() == null) {
             return createLanguage(language);
         }
-        Language result = languageRepository.save(language);
+        Language result = languageService.save(language);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, language.getId().toString()))
             .body(result);
@@ -97,7 +92,7 @@ public class LanguageResource {
     @Timed
     public ResponseEntity<List<Language>> getAllLanguages(Pageable pageable) {
         log.debug("REST request to get a page of Languages");
-        Page<Language> page = languageRepository.findAll(pageable);
+        Page<Language> page = languageService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/languages");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -112,7 +107,7 @@ public class LanguageResource {
     @Timed
     public ResponseEntity<Language> getLanguage(@PathVariable Long id) {
         log.debug("REST request to get Language : {}", id);
-        Language language = languageRepository.findOne(id);
+        Language language = languageService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(language));
     }
 
@@ -124,10 +119,9 @@ public class LanguageResource {
      */
     @DeleteMapping("/languages/{id}")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteLanguage(@PathVariable Long id) {
         log.debug("REST request to delete Language : {}", id);
-        languageRepository.delete(id);
+        languageService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

@@ -1,0 +1,24 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "internationalTag" : {
+            "home": {
+                "title": "International Tags",
+                "createLabel": "Create a new International Tag",
+                "createOrEditLabel": "Create or edit a International Tag"
+            },
+            "created": "A new International Tag is created with identifier {{ param }}",
+            "updated": "A International Tag is updated with identifier {{ param }}",
+            "deleted": "A International Tag is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete International Tag {{ id }}?"
+            },
+            "detail": {
+                "title": "International Tag"
+            },
+            "title": "Title",
+            "language": "Language",
+            "tags": "Tags"
+        }
+    }
+}

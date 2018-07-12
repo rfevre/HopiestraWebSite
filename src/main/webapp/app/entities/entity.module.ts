@@ -7,6 +7,7 @@ import { HopiestraWebSiteThemeModule } from './theme/theme.module';
 import { HopiestraWebSiteThemeSubscriptionModule } from './theme-subscription/theme-subscription.module';
 import { HopiestraWebSiteArticleModule } from './article/article.module';
 import { HopiestraWebSiteCommentaryModule } from './commentary/commentary.module';
+import { HopiestraWebSiteInternationalTagModule } from './international-tag/international-tag.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HopiestraWebSiteCommentaryModule } from './commentary/commentary.module
         HopiestraWebSiteThemeSubscriptionModule,
         HopiestraWebSiteArticleModule,
         HopiestraWebSiteCommentaryModule,
+        HopiestraWebSiteInternationalTagModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

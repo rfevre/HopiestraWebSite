@@ -1,0 +1,24 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "internationalTag" : {
+            "home": {
+                "title": "InternationalTags",
+                "createLabel": "Créer un nouveau International Tag",
+                "createOrEditLabel": "Créer ou éditer un International Tag"
+            },
+            "created": "Un nouveau International Tag a été créé avec l'identifiant {{ param }}",
+            "updated": "Le International Tag avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le International Tag avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le International Tag {{ id }} ?"
+            },
+            "detail": {
+                "title": "International Tag"
+            },
+            "title": "Title",
+            "language": "Language",
+            "tags": "Tags"
+        }
+    }
+}

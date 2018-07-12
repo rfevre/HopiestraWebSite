@@ -2,8 +2,7 @@ package com.hopiestra.site.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.hopiestra.site.domain.Tag;
-
-import com.hopiestra.site.repository.TagRepository;
+import com.hopiestra.site.service.TagService;
 import com.hopiestra.site.web.rest.errors.BadRequestAlertException;
 import com.hopiestra.site.web.rest.util.HeaderUtil;
 import com.hopiestra.site.web.rest.util.PaginationUtil;
@@ -35,10 +34,10 @@ public class TagResource {
 
     private static final String ENTITY_NAME = "tag";
 
-    private final TagRepository tagRepository;
+    private final TagService tagService;
 
-    public TagResource(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
+    public TagResource(TagService tagService) {
+        this.tagService = tagService;
     }
 
     /**
@@ -55,7 +54,7 @@ public class TagResource {
         if (tag.getId() != null) {
             throw new BadRequestAlertException("A new tag cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Tag result = tagRepository.save(tag);
+        Tag result = tagService.save(tag);
         return ResponseEntity.created(new URI("/api/tags/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -77,7 +76,7 @@ public class TagResource {
         if (tag.getId() == null) {
             return createTag(tag);
         }
-        Tag result = tagRepository.save(tag);
+        Tag result = tagService.save(tag);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, tag.getId().toString()))
             .body(result);
@@ -93,7 +92,7 @@ public class TagResource {
     @Timed
     public ResponseEntity<List<Tag>> getAllTags(Pageable pageable) {
         log.debug("REST request to get a page of Tags");
-        Page<Tag> page = tagRepository.findAll(pageable);
+        Page<Tag> page = tagService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tags");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -108,7 +107,7 @@ public class TagResource {
     @Timed
     public ResponseEntity<Tag> getTag(@PathVariable Long id) {
         log.debug("REST request to get Tag : {}", id);
-        Tag tag = tagRepository.findOne(id);
+        Tag tag = tagService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(tag));
     }
 
@@ -122,7 +121,7 @@ public class TagResource {
     @Timed
     public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
         log.debug("REST request to delete Tag : {}", id);
-        tagRepository.delete(id);
+        tagService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

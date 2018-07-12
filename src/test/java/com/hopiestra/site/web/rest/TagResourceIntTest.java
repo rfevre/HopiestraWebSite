@@ -4,6 +4,7 @@ import com.hopiestra.site.HopiestraWebSiteApp;
 
 import com.hopiestra.site.domain.Tag;
 import com.hopiestra.site.repository.TagRepository;
+import com.hopiestra.site.service.TagService;
 import com.hopiestra.site.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -38,11 +39,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = HopiestraWebSiteApp.class)
 public class TagResourceIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
+    private TagService tagService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -63,7 +67,7 @@ public class TagResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TagResource tagResource = new TagResource(tagRepository);
+        final TagResource tagResource = new TagResource(tagService);
         this.restTagMockMvc = MockMvcBuilders.standaloneSetup(tagResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -79,7 +83,7 @@ public class TagResourceIntTest {
      */
     public static Tag createEntity(EntityManager em) {
         Tag tag = new Tag()
-            .name(DEFAULT_NAME);
+            .code(DEFAULT_CODE);
         return tag;
     }
 
@@ -103,7 +107,7 @@ public class TagResourceIntTest {
         List<Tag> tagList = tagRepository.findAll();
         assertThat(tagList).hasSize(databaseSizeBeforeCreate + 1);
         Tag testTag = tagList.get(tagList.size() - 1);
-        assertThat(testTag.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testTag.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -127,10 +131,10 @@ public class TagResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = tagRepository.findAll().size();
         // set the field null
-        tag.setName(null);
+        tag.setCode(null);
 
         // Create the Tag, which fails.
 
@@ -154,7 +158,7 @@ public class TagResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tag.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -168,7 +172,7 @@ public class TagResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tag.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -183,7 +187,8 @@ public class TagResourceIntTest {
     @Transactional
     public void updateTag() throws Exception {
         // Initialize the database
-        tagRepository.saveAndFlush(tag);
+        tagService.save(tag);
+
         int databaseSizeBeforeUpdate = tagRepository.findAll().size();
 
         // Update the tag
@@ -191,7 +196,7 @@ public class TagResourceIntTest {
         // Disconnect from session so that the updates on updatedTag are not directly saved in db
         em.detach(updatedTag);
         updatedTag
-            .name(UPDATED_NAME);
+            .code(UPDATED_CODE);
 
         restTagMockMvc.perform(put("/api/tags")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -202,7 +207,7 @@ public class TagResourceIntTest {
         List<Tag> tagList = tagRepository.findAll();
         assertThat(tagList).hasSize(databaseSizeBeforeUpdate);
         Tag testTag = tagList.get(tagList.size() - 1);
-        assertThat(testTag.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testTag.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test
@@ -227,7 +232,8 @@ public class TagResourceIntTest {
     @Transactional
     public void deleteTag() throws Exception {
         // Initialize the database
-        tagRepository.saveAndFlush(tag);
+        tagService.save(tag);
+
         int databaseSizeBeforeDelete = tagRepository.findAll().size();
 
         // Get the tag

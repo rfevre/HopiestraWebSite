@@ -7,11 +7,18 @@
             "relationshipType": "many-to-many",
             "ownerSide": false,
             "otherEntityRelationshipName": "tags"
+        },
+        {
+            "relationshipName": "internationalTags",
+            "otherEntityName": "internationalTag",
+            "relationshipType": "many-to-many",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tags"
         }
     ],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -20,7 +27,7 @@
     ],
     "changelogDate": "20180605105221",
     "dto": "no",
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "tag",
     "jpaMetamodelFiltering": false,
     "pagination": "pagination"

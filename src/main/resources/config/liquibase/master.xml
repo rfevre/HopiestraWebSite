@@ -12,11 +12,14 @@
     <include file="config/liquibase/changelog/20180614181058_added_entity_ThemeSubscription.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180620114428_added_entity_Article.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180623173227_added_entity_Commentary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180712215800_added_entity_InternationalTag.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here --> 
     <include file="config/liquibase/changelog/20180613112122_added_entity_constraints_Theme.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180614181058_added_entity_constraints_ThemeSubscription.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180620114428_added_entity_constraints_Article.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180605125958_added_entity_constraints_InternationalArticle.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180623173227_added_entity_constraints_Commentary.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180712215800_added_entity_constraints_InternationalTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180605105221_added_entity_constraints_Tag.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

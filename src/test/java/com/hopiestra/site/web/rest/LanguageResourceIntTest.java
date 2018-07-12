@@ -4,6 +4,7 @@ import com.hopiestra.site.HopiestraWebSiteApp;
 
 import com.hopiestra.site.domain.Language;
 import com.hopiestra.site.repository.LanguageRepository;
+import com.hopiestra.site.service.LanguageService;
 import com.hopiestra.site.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -48,6 +49,9 @@ public class LanguageResourceIntTest {
     private LanguageRepository languageRepository;
 
     @Autowired
+    private LanguageService languageService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -66,7 +70,7 @@ public class LanguageResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final LanguageResource languageResource = new LanguageResource(languageRepository);
+        final LanguageResource languageResource = new LanguageResource(languageService);
         this.restLanguageMockMvc = MockMvcBuilders.standaloneSetup(languageResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -208,7 +212,8 @@ public class LanguageResourceIntTest {
     @Transactional
     public void updateLanguage() throws Exception {
         // Initialize the database
-        languageRepository.saveAndFlush(language);
+        languageService.save(language);
+
         int databaseSizeBeforeUpdate = languageRepository.findAll().size();
 
         // Update the language
@@ -254,7 +259,8 @@ public class LanguageResourceIntTest {
     @Transactional
     public void deleteLanguage() throws Exception {
         // Initialize the database
-        languageRepository.saveAndFlush(language);
+        languageService.save(language);
+
         int databaseSizeBeforeDelete = languageRepository.findAll().size();
 
         // Get the language

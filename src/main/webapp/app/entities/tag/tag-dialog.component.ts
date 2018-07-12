@@ -10,6 +10,7 @@ import { Tag } from './tag.model';
 import { TagPopupService } from './tag-popup.service';
 import { TagService } from './tag.service';
 import { Article, ArticleService } from '../article';
+import { InternationalTag, InternationalTagService } from '../international-tag';
 
 @Component({
     selector: 'jhi-tag-dialog',
@@ -22,11 +23,14 @@ export class TagDialogComponent implements OnInit {
 
     articles: Article[];
 
+    internationaltags: InternationalTag[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private tagService: TagService,
         private articleService: ArticleService,
+        private internationalTagService: InternationalTagService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -35,6 +39,8 @@ export class TagDialogComponent implements OnInit {
         this.isSaving = false;
         this.articleService.query()
             .subscribe((res: HttpResponse<Article[]>) => { this.articles = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.internationalTagService.query()
+            .subscribe((res: HttpResponse<InternationalTag[]>) => { this.internationaltags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -72,6 +78,10 @@ export class TagDialogComponent implements OnInit {
     }
 
     trackArticleById(index: number, item: Article) {
+        return item.id;
+    }
+
+    trackInternationalTagById(index: number, item: InternationalTag) {
         return item.id;
     }
 

@@ -16,8 +16,9 @@
             "detail": {
                 "title": "Tag"
             },
-            "name": "Name",
-            "articles": "Articles"
+            "code": "Code",
+            "articles": "Articles",
+            "internationalTags": "International Tags"
         }
     }
 }

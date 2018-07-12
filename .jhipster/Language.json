@@ -19,7 +19,7 @@
     ],
     "changelogDate": "20180605105400",
     "dto": "no",
-    "service": "no",
+    "service": "serviceClass",
     "entityTableName": "language",
     "jpaMetamodelFiltering": false,
     "pagination": "pagination"
