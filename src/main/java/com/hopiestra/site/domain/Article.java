@@ -49,7 +49,7 @@ public class Article implements Serializable {
     private Instant deleteDate;
 
     @NotNull
-    @Column(name = "admin_title", nullable = false)
+    @Column(name = "admin_title", nullable = false, unique = true)
     private String adminTitle;
 
     @ManyToOne(optional = false)

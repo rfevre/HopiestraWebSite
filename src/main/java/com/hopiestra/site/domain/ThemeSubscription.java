@@ -28,7 +28,7 @@ public class ThemeSubscription implements Serializable {
 
     @NotNull
     @Pattern(regexp = "(^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$)")
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "subscripiton_for_all")
