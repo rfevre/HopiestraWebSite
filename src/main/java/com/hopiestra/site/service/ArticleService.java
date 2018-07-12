@@ -1,5 +1,7 @@
 package com.hopiestra.site.service;
 
+import java.time.Instant;
+
 import com.hopiestra.site.domain.Article;
 import com.hopiestra.site.repository.ArticleRepository;
 import org.slf4j.Logger;
@@ -33,6 +35,12 @@ public class ArticleService {
      */
     public Article save(Article article) {
         log.debug("Request to save Article : {}", article);
+
+        if(article.getId() == null) {
+            article.creationDate(Instant.now());
+        }
+        article.updateDate(Instant.now());
+
         return articleRepository.save(article);
     }
 

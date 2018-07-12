@@ -294,12 +294,12 @@ amdefine@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-froala-wysiwyg@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/angular-froala-wysiwyg/-/angular-froala-wysiwyg-2.8.1.tgz#cafe9e562815a9af5facc468b204cb678b3da059"
+angular-froala-wysiwyg@^2.8.4:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/angular-froala-wysiwyg/-/angular-froala-wysiwyg-2.8.4.tgz#71456248e6a8c469f00dca0037c11ae409ff597a"
   dependencies:
     "@types/jquery" "^2.0.40"
-    froala-editor "^2.8.1"
+    froala-editor "2.8.4"
 
 angular2-template-loader@0.6.2:
   version "0.6.2"
@@ -3039,9 +3039,9 @@ fresh@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.3.0.tgz#651f838e22424e7566de161d8358caa199f83d4f"
 
-froala-editor@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/froala-editor/-/froala-editor-2.8.1.tgz#265127caac180c019abeeb28b833c997a5f0483f"
+froala-editor@2.8.4:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/froala-editor/-/froala-editor-2.8.4.tgz#b50c20799218e9e02e195d0616decfd5679c4b53"
   dependencies:
     font-awesome ">=4.4.0"
     jquery ">=1.11.0"

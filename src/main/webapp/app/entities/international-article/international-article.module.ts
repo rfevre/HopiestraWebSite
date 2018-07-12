@@ -16,6 +16,10 @@ import {
     InternationalArticleResolvePagingParams,
 } from './';
 
+import 'froala-editor/js/froala_editor.pkgd.min.js';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
+
 const ENTITY_STATES = [
     ...internationalArticleRoute,
     ...internationalArticlePopupRoute,
@@ -24,7 +28,9 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         HopiestraWebSiteSharedModule,
-        RouterModule.forChild(ENTITY_STATES)
+        RouterModule.forChild(ENTITY_STATES),
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot(),
     ],
     declarations: [
         InternationalArticleComponent,
@@ -33,6 +39,7 @@ const ENTITY_STATES = [
         InternationalArticleDeleteDialogComponent,
         InternationalArticlePopupComponent,
         InternationalArticleDeletePopupComponent,
+        SafeHtmlPipe
     ],
     entryComponents: [
         InternationalArticleComponent,

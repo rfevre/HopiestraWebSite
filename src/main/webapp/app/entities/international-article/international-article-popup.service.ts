@@ -43,7 +43,7 @@ export class InternationalArticlePopupService {
     }
 
     internationalArticleModalRef(component: Component, internationalArticle: InternationalArticle): NgbModalRef {
-        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
+        const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static', windowClass: 'modal-full-width'});
         modalRef.componentInstance.internationalArticle = internationalArticle;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });

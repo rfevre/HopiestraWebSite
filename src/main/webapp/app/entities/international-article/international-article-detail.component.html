@@ -10,7 +10,7 @@
         </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.content">Content</span></dt>
         <dd>
-            <span>{{internationalArticle.content}}</span>
+            <span [innerHTML]="internationalArticle.content | safeHtml"></span>
         </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.language">Language</span></dt>
         <dd>
