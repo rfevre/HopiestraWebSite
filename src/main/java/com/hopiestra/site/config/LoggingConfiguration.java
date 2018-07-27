@@ -21,7 +21,6 @@ import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.beans.factory.annotation.Autowired;

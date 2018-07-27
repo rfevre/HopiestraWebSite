@@ -36,10 +36,12 @@ public class ArticleService {
     public Article save(Article article) {
         log.debug("Request to save Article : {}", article);
 
+        Instant dateNow = Instant.now(); 
+
         if(article.getId() == null) {
-            article.creationDate(Instant.now());
+            article.creationDate(dateNow);
         }
-        article.updateDate(Instant.now());
+        article.updateDate(dateNow);
 
         return articleRepository.save(article);
     }
