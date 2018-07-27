@@ -11,7 +11,7 @@
         <dt><span jhiTranslate="hopiestraWebSiteApp.tag.internationalTags">International Tags</span></dt>
         <dd>
             <span *ngFor="let internationalTags of tag.internationalTags; let last = last">
-                <a [routerLink]="['/international-tag', internationalTags?.id ]">{{internationalTags.id}}</a>{{last ? '' : ', '}}
+                <a [routerLink]="['/international-tag', internationalTags?.id ]">{{internationalTags.id}} - {{internationalTags.title}}</a>{{last ? '' : ', '}}
             </span>
         </dd>
     </dl>

@@ -27,7 +27,7 @@
         <div class="form-group">
             <label jhiTranslate="hopiestraWebSiteApp.tag.internationalTags" for="field_internationalTags">International Tags</label>
             <select class="form-control" id="field_internationalTags" multiple name="internationalTags" [(ngModel)]="tag.internationalTags">
-                <option [ngValue]="getSelected(tag.internationalTags, internationalTagOption)" *ngFor="let internationalTagOption of internationaltags; trackBy: trackInternationalTagById">{{internationalTagOption.id}}</option>
+                <option [ngValue]="getSelected(tag.internationalTags, internationalTagOption)" *ngFor="let internationalTagOption of internationaltags; trackBy: trackInternationalTagById">{{internationalTagOption.title}}</option>
             </select>
         </div>
     </div>
