@@ -18,7 +18,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="title"><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.title">Title</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="content"><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.content">Content</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="language.name"><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.language">Language</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="article.id"><span jhiTranslate="hopiestraWebSiteApp.internationalArticle.article">Article</span> <span class="fa fa-sort"></span></th>
             <th></th>
@@ -28,7 +27,6 @@
             <tr *ngFor="let internationalArticle of internationalArticles ;trackBy: trackId">
                 <td><a [routerLink]="['../international-article', internationalArticle.id ]">{{internationalArticle.id}}</a></td>
                 <td>{{internationalArticle.title}}</td>
-                <td>{{internationalArticle.content}}</td>
                 <td>
                     <div *ngIf="internationalArticle.language">
                         <a [routerLink]="['../language', internationalArticle.language?.id ]" >{{internationalArticle.language?.name}}</a>
@@ -36,7 +34,7 @@
                 </td>
                 <td>
                     <div *ngIf="internationalArticle.article">
-                        <a [routerLink]="['../article', internationalArticle.article?.id ]" >{{internationalArticle.article?.id}}</a>
+                        <a [routerLink]="['../article', internationalArticle.article?.id ]" >{{internationalArticle.article?.adminTitle}}</a>
                     </div>
                 </td>
                 <td class="text-right">
