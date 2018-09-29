@@ -100,6 +100,20 @@ public class ThemeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/themes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /themes : get all the themes.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of themes in body
+     */
+    @GetMapping("/themes/univers")
+    @Timed
+    public ResponseEntity<List<Theme>> getAllUnivers() {
+        log.debug("REST request to get a page of Themes");
+        List<Theme> univers = themeService.findByParentThemeIsNull();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(univers));
+    }
 
     /**
      * GET  /themes/:id : get the "id" theme.

@@ -1,5 +1,7 @@
 package com.hopiestra.site.service;
 
+import java.util.List;
+
 import com.hopiestra.site.domain.Theme;
 import com.hopiestra.site.repository.ThemeRepository;
 import org.slf4j.Logger;
@@ -58,6 +60,12 @@ public class ThemeService {
     public Theme findOne(Long id) {
         log.debug("Request to get Theme : {}", id);
         return themeRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Theme> findByParentThemeIsNull() {
+        log.debug("Request to get all Univers");
+        return themeRepository.findByParentThemeIsNull();
     }
 
     /**
