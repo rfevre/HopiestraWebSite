@@ -65,7 +65,7 @@ public class ThemeService {
     @Transactional(readOnly = true)
     public List<Theme> findByParentThemeIsNull() {
         log.debug("Request to get all Univers");
-        return themeRepository.findByParentThemeIsNull();
+        return themeRepository.findByParentThemeIsNullOrderByOrder();
     }
 
     /**

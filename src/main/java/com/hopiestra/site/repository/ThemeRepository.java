@@ -15,6 +15,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ThemeRepository extends JpaRepository<Theme, Long> {
 
-    List<Theme> findByParentThemeIsNull();
+    List<Theme> findByParentThemeIsNullOrderByOrder();
 
 }
