@@ -1,8 +1,9 @@
 /* after changing this file run 'yarn run webpack:build' */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.min.css';
-@import '~froala-editor/css/froala_editor.pkgd.min.css';
-@import '~froala-editor/css/froala_style.min.css';
+
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 
 @import './modal.css';
-@import './froala.css';
+@import './quill.css';

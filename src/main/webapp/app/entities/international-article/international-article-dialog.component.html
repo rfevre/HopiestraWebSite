@@ -25,9 +25,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.internationalArticle.content" for="field_content">Content</label>
-            <div [froalaEditor] class="form-control" name="content" id="field_content"  [(ngModel)]="internationalArticle.content" required>
-                Hello, Froala!
-            </div>
+            <quill-editor [modules]="editor_modules" format="html" class="form-control" name="content" id="field_content"  [(ngModel)]="internationalArticle.content" required></quill-editor>
             <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.content?.errors?.required" jhiTranslate="entity.validation.required">

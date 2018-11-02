@@ -16,8 +16,7 @@ import {
     InternationalArticleResolvePagingParams,
 } from './';
 
-import 'froala-editor/js/froala_editor.pkgd.min.js';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { QuillModule } from 'ngx-quill';
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 
 const ENTITY_STATES = [
@@ -29,8 +28,7 @@ const ENTITY_STATES = [
     imports: [
         HopiestraWebSiteSharedModule,
         RouterModule.forChild(ENTITY_STATES),
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot(),
+        QuillModule
     ],
     declarations: [
         InternationalArticleComponent,

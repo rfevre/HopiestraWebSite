@@ -89,7 +89,8 @@ module.exports = (options) => ({
         ]),
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery"
+            jQuery: "jquery",
+            'window.Quill': 'quill/dist/quill.js'
         }),
         new MergeJsonWebpackPlugin({
             output: {
