@@ -59,6 +59,18 @@ public class ArticleService {
     }
 
     /**
+     * Get all the articles.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<Article> findAllByTheme(Pageable pageable, Long themeId) {
+        log.debug("Request to get all Articles by theme : {}", themeId);
+        return articleRepository.findAllByTheme(pageable, themeId);
+    }
+
+    /**
      * Get one article by id.
      *
      * @param id the id of the entity

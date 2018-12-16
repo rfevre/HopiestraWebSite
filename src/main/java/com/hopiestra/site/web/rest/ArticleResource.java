@@ -98,6 +98,21 @@ public class ArticleResource {
     }
 
     /**
+     * GET  /articles : get all the articles by theme id.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of articles in body
+     */
+    @GetMapping("/articles/theme/{themeId}")
+    @Timed
+    public ResponseEntity<List<Article>> getAllArticlesByTheme(Pageable pageable, @PathVariable Long themeId) {
+        log.debug("REST request to get a page of Articles");
+        Page<Article> page = articleService.findAllByTheme(pageable, themeId);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /articles/:id : get the "id" article.
      *
      * @param id the id of the article to retrieve
