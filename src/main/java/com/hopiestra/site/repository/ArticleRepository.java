@@ -24,7 +24,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("select article from Article article left join fetch article.tags where article.id =:id")
     Article findOneWithEagerRelationships(@Param("id") Long id);
 
-    @Query("select article from Article article where article.theme.id =:themeId OR article.theme.parentTheme.id =:themeId")
-    Page<Article> findAllByTheme(Pageable pageable, @Param("themeId") Long themeId);
+    @Query("select distinct article from Article article where article.theme.id IN :themesId")
+    Page<Article> findAllByThemes(Pageable pageable, @Param("themesId") List<Long> themesId);
 
 }

@@ -1,9 +1,14 @@
 package com.hopiestra.site.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hopiestra.site.domain.Article;
+import com.hopiestra.site.domain.Theme;
 import com.hopiestra.site.repository.ArticleRepository;
+import com.hopiestra.site.repository.ThemeRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -23,8 +28,11 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public ArticleService(ArticleRepository articleRepository) {
+    private final ThemeRepository themeRepository;
+
+    public ArticleService(ArticleRepository articleRepository, ThemeRepository themeRepository) {
         this.articleRepository = articleRepository;
+        this.themeRepository = themeRepository;
     }
 
     /**
@@ -67,7 +75,24 @@ public class ArticleService {
     @Transactional(readOnly = true)
     public Page<Article> findAllByTheme(Pageable pageable, Long themeId) {
         log.debug("Request to get all Articles by theme : {}", themeId);
-        return articleRepository.findAllByTheme(pageable, themeId);
+
+        List<Long> themesId = new ArrayList<>();
+        List<Theme> themes = themeRepository.findAll();
+
+        for(Theme theme: themes) {
+            Long subThemeId = theme.getId();
+            while(theme.getParentTheme() != null) {
+                theme = theme.getParentTheme();
+
+                if(theme.getId().equals(themeId)) {
+                    themesId.add(subThemeId);
+                }
+            }
+        }
+
+        themesId.add(themeId);
+
+        return articleRepository.findAllByThemes(pageable, themesId);
     }
 
     /**
