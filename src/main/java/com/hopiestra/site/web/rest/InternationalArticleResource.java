@@ -124,4 +124,24 @@ public class InternationalArticleResource {
         internationalArticleService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET  /international-articles/article/:articleId/lang-code/:langCode : get the "id" internationalArticle.
+     *
+     * @param id the id of the internationalArticle to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the internationalArticle, or with status 404 (Not Found)
+     */
+    @GetMapping("/international-articles/article/{articleId}/lang-code/{langCode}")
+    @Timed
+    public ResponseEntity<InternationalArticle> getInternationalArticleByArticleIdAndLangCode(@PathVariable Long articleId, @PathVariable String langCode) {
+        log.debug("REST request to get InternationalArticle by article id and language code : {}", articleId, langCode);
+        InternationalArticle internationalArticle = internationalArticleService.findByArticleAndLangCode(articleId, langCode);
+
+        // Clear content pour loading plus rapide sur la liste des articles
+        if(internationalArticle != null) {
+            internationalArticle.setContent("");
+        }
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(internationalArticle));
+    }
 }

@@ -4,6 +4,7 @@ import com.hopiestra.site.domain.InternationalArticle;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 
 /**
@@ -12,5 +13,8 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface InternationalArticleRepository extends JpaRepository<InternationalArticle, Long> {
+
+    @Query("select internationalArticle from InternationalArticle internationalArticle where internationalArticle.article.id =:articleId and internationalArticle.language.code =:langCode")
+    InternationalArticle findByArticleAndLangCode(@Param("articleId") Long articleId, @Param("langCode") String langCode);
 
 }

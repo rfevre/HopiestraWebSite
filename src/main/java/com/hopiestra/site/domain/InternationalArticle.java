@@ -37,7 +37,7 @@ public class InternationalArticle implements Serializable {
     @NotNull
     private Language language;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @NotNull
     private Article article;
 

@@ -56,7 +56,7 @@ public class Article implements Serializable {
     @NotNull
     private User author;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Theme theme;
 
     @OneToMany(mappedBy = "article")

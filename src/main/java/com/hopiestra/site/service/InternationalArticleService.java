@@ -69,4 +69,16 @@ public class InternationalArticleService {
         log.debug("Request to delete InternationalArticle : {}", id);
         internationalArticleRepository.delete(id);
     }
+
+    /**
+     * Get one internationalArticle by article id and language code.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public InternationalArticle findByArticleAndLangCode(Long articleId, String langCode) {
+        log.debug("Request to get InternationalArticle by article id and language code: {}", articleId, langCode);
+        return internationalArticleRepository.findByArticleAndLangCode(articleId, langCode);
+    }
 }

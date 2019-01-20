@@ -31,7 +31,7 @@ public class InternationalTag implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @NotNull
     private Language language;
 
