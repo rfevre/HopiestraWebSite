@@ -77,6 +77,18 @@
                             <span jhiTranslate="global.menu.entities.commentary">Commentary</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="image" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.image">Image</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="international-theme" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.internationalTheme">International Theme</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

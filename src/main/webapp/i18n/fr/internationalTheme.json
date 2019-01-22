@@ -1,0 +1,23 @@
+
+{
+    "hopiestraWebSiteApp": {
+        "internationalTheme" : {
+            "home": {
+                "title": "InternationalThemes",
+                "createLabel": "Créer un nouveau International Theme",
+                "createOrEditLabel": "Créer ou éditer un International Theme"
+            },
+            "created": "Un nouveau International Theme a été créé avec l'identifiant {{ param }}",
+            "updated": "Le International Theme avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le International Theme avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le International Theme {{ id }} ?"
+            },
+            "detail": {
+                "title": "International Theme"
+            },
+            "name": "Name",
+            "language": "Language"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+
+<div *ngIf="image">
+    <h2><span jhiTranslate="hopiestraWebSiteApp.image.detail.title">Image</span> {{image.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hopiestraWebSiteApp.image.imageBlob">Image Blob</span></dt>
+        <dd>
+            <div *ngIf="image.imageBlob">
+                <a (click)="openFile(image.imageBlobContentType, image.imageBlob)">
+                    <img [src]="'data:' + image.imageBlobContentType + ';base64,' + image.imageBlob" style="max-width: 100%;" alt="image image"/>
+                </a>
+                {{image.imageBlobContentType}}, {{byteSize(image.imageBlob)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.image.name">Name</span></dt>
+        <dd>
+            <span>{{image.name}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'image/'+ image.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

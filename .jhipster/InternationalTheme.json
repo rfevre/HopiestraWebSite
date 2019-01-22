@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "language",
+            "otherEntityName": "language",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20190122202216",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "international_theme",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
