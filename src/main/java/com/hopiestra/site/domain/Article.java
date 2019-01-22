@@ -28,13 +28,6 @@ public class Article implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Lob
-    @Column(name = "background_picture")
-    private byte[] backgroundPicture;
-
-    @Column(name = "background_picture_content_type")
-    private String backgroundPictureContentType;
-
     @NotNull
     @Column(name = "publication_date", nullable = false)
     private Instant publicationDate;
@@ -49,14 +42,14 @@ public class Article implements Serializable {
     private Instant deleteDate;
 
     @NotNull
-    @Column(name = "admin_title", nullable = false, unique = true)
+    @Column(name = "admin_title", nullable = false)
     private String adminTitle;
 
     @ManyToOne(optional = false)
     @NotNull
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Theme theme;
 
     @OneToMany(mappedBy = "article")
@@ -71,6 +64,9 @@ public class Article implements Serializable {
                inverseJoinColumns = @JoinColumn(name="tags_id", referencedColumnName="id"))
     private Set<Tag> tags = new HashSet<>();
 
+    @ManyToOne
+    private Image backgroundPicture;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -78,32 +74,6 @@ public class Article implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public byte[] getBackgroundPicture() {
-        return backgroundPicture;
-    }
-
-    public Article backgroundPicture(byte[] backgroundPicture) {
-        this.backgroundPicture = backgroundPicture;
-        return this;
-    }
-
-    public void setBackgroundPicture(byte[] backgroundPicture) {
-        this.backgroundPicture = backgroundPicture;
-    }
-
-    public String getBackgroundPictureContentType() {
-        return backgroundPictureContentType;
-    }
-
-    public Article backgroundPictureContentType(String backgroundPictureContentType) {
-        this.backgroundPictureContentType = backgroundPictureContentType;
-        return this;
-    }
-
-    public void setBackgroundPictureContentType(String backgroundPictureContentType) {
-        this.backgroundPictureContentType = backgroundPictureContentType;
     }
 
     public Instant getPublicationDate() {
@@ -246,6 +216,19 @@ public class Article implements Serializable {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
+
+    public Image getBackgroundPicture() {
+        return backgroundPicture;
+    }
+
+    public Article backgroundPicture(Image image) {
+        this.backgroundPicture = image;
+        return this;
+    }
+
+    public void setBackgroundPicture(Image image) {
+        this.backgroundPicture = image;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -272,8 +255,6 @@ public class Article implements Serializable {
     public String toString() {
         return "Article{" +
             "id=" + getId() +
-            ", backgroundPicture='" + getBackgroundPicture() + "'" +
-            ", backgroundPictureContentType='" + getBackgroundPictureContentType() + "'" +
             ", publicationDate='" + getPublicationDate() + "'" +
             ", updateDate='" + getUpdateDate() + "'" +
             ", creationDate='" + getCreationDate() + "'" +

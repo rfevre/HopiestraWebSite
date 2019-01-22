@@ -31,5 +31,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tag"/>
         
+        <addForeignKeyConstraint baseColumnNames="background_picture_id"
+                                 baseTableName="article"
+                                 constraintName="fk_article_background_picture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image"/>
+
     </changeSet>
 </databaseChangeLog>

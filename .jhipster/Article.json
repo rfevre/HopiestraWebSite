@@ -32,14 +32,15 @@
             "otherEntityField": "name",
             "ownerSide": true,
             "otherEntityRelationshipName": "articles"
+        },
+        {
+            "relationshipName": "backgroundPicture",
+            "otherEntityName": "image",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
-        {
-            "fieldName": "backgroundPicture",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
         {
             "fieldName": "publicationDate",
             "fieldType": "Instant",

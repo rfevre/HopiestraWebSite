@@ -13,23 +13,6 @@
                    [(ngModel)]="article.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture" for="field_backgroundPicture">Background Picture</label>
-            <div>
-                <img [src]="'data:' + article.backgroundPictureContentType + ';base64,' + article.backgroundPicture" style="max-height: 100px;" *ngIf="article.backgroundPicture" alt="article image"/>
-                <div *ngIf="article.backgroundPicture" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{article.backgroundPictureContentType}}, {{byteSize(article.backgroundPicture)}}</span>
-                    <button type="button" (click)="clearInputImage('backgroundPicture', 'backgroundPictureContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_backgroundPicture" (change)="setFileData($event, article, 'backgroundPicture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="backgroundPicture" id="field_backgroundPicture"
-                [(ngModel)]="article.backgroundPicture" />
-            <input type="hidden" class="form-control" name="backgroundPictureContentType" id="field_backgroundPictureContentType"
-                [(ngModel)]="article.backgroundPictureContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.publicationDate" for="field_publicationDate">Publication Date</label>
             <div class="d-flex">
                 <input id="field_publicationDate" type="datetime-local" class="form-control" name="publicationDate" [(ngModel)]="article.publicationDate"
@@ -44,6 +27,27 @@
                     [hidden]="!editForm.controls.publicationDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
                 </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.updateDate" for="field_updateDate">Update Date</label>
+            <div class="d-flex">
+                <input id="field_updateDate" type="datetime-local" class="form-control" name="updateDate" [(ngModel)]="article.updateDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.creationDate" for="field_creationDate">Creation Date</label>
+            <div class="d-flex">
+                <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="article.creationDate"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.deleteDate" for="field_deleteDate">Delete Date</label>
+            <div class="d-flex">
+                <input id="field_deleteDate" type="datetime-local" class="form-control" name="deleteDate" [(ngModel)]="article.deleteDate"
+                />
             </div>
         </div>
         <div class="form-group">
@@ -82,6 +86,13 @@
             <label jhiTranslate="hopiestraWebSiteApp.article.tags" for="field_tags">Tags</label>
             <select class="form-control" id="field_tags" multiple name="tags" [(ngModel)]="article.tags">
                 <option [ngValue]="getSelected(article.tags, tagOption)" *ngFor="let tagOption of tags; trackBy: trackTagById">{{tagOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture" for="field_backgroundPicture">Background Picture</label>
+            <select class="form-control" id="field_backgroundPicture" name="backgroundPicture" [(ngModel)]="article.backgroundPicture" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="imageOption.id === article.backgroundPicture?.id ? article.backgroundPicture : imageOption" *ngFor="let imageOption of images; trackBy: trackImageById">{{imageOption.name}}</option>
             </select>
         </div>
     </div>

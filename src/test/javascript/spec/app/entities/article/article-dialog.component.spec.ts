@@ -12,6 +12,7 @@ import { Article } from '../../../../../../main/webapp/app/entities/article/arti
 import { UserService } from '../../../../../../main/webapp/app/shared';
 import { ThemeService } from '../../../../../../main/webapp/app/entities/theme';
 import { TagService } from '../../../../../../main/webapp/app/entities/tag';
+import { ImageService } from '../../../../../../main/webapp/app/entities/image';
 
 describe('Component Tests', () => {
 
@@ -30,6 +31,7 @@ describe('Component Tests', () => {
                     UserService,
                     ThemeService,
                     TagService,
+                    ImageService,
                     ArticleService
                 ]
             })

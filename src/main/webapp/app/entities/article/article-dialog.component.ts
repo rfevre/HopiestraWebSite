@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Article } from './article.model';
 import { ArticlePopupService } from './article-popup.service';
@@ -12,6 +12,7 @@ import { ArticleService } from './article.service';
 import { User, UserService } from '../../shared';
 import { Theme, ThemeService } from '../theme';
 import { Tag, TagService } from '../tag';
+import { Image, ImageService } from '../image';
 
 @Component({
     selector: 'jhi-article-dialog',
@@ -28,15 +29,16 @@ export class ArticleDialogComponent implements OnInit {
 
     tags: Tag[];
 
+    images: Image[];
+
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private articleService: ArticleService,
         private userService: UserService,
         private themeService: ThemeService,
         private tagService: TagService,
-        private elementRef: ElementRef,
+        private imageService: ImageService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -49,22 +51,8 @@ export class ArticleDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<Theme[]>) => { this.themes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.tagService.query()
             .subscribe((res: HttpResponse<Tag[]>) => { this.tags = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
-    clearInputImage(field: string, fieldContentType: string, idInput: string) {
-        this.dataUtils.clearInputImage(this.article, this.elementRef, field, fieldContentType, idInput);
+        this.imageService.query()
+            .subscribe((res: HttpResponse<Image[]>) => { this.images = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -110,6 +98,10 @@ export class ArticleDialogComponent implements OnInit {
     }
 
     trackTagById(index: number, item: Tag) {
+        return item.id;
+    }
+
+    trackImageById(index: number, item: Image) {
         return item.id;
     }
 

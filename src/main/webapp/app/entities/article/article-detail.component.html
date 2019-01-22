@@ -4,15 +4,6 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture">Background Picture</span></dt>
-        <dd>
-            <div *ngIf="article.backgroundPicture">
-                <a (click)="openFile(article.backgroundPictureContentType, article.backgroundPicture)">
-                    <img [src]="'data:' + article.backgroundPictureContentType + ';base64,' + article.backgroundPicture" style="max-width: 100%;" alt="article image"/>
-                </a>
-                {{article.backgroundPictureContentType}}, {{byteSize(article.backgroundPicture)}}
-            </div>
-        </dd>
         <dt><span jhiTranslate="hopiestraWebSiteApp.article.publicationDate">Publication Date</span></dt>
         <dd>
             <span>{{article.publicationDate | date:'medium'}}</span>
@@ -48,6 +39,12 @@
             <span *ngFor="let tags of article.tags; let last = last">
                 <a [routerLink]="['/tag', tags?.id ]">{{tags.name}}</a>{{last ? '' : ', '}}
             </span>
+        </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.article.backgroundPicture">Background Picture</span></dt>
+        <dd>
+            <div *ngIf="article.backgroundPicture">
+                <a [routerLink]="['/image', article.backgroundPicture?.id]">{{article.backgroundPicture?.name}}</a>
+            </div>
         </dd>
     </dl>
 

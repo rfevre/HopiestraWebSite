@@ -21,7 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -42,11 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = HopiestraWebSiteApp.class)
 public class ArticleResourceIntTest {
-
-    private static final byte[] DEFAULT_BACKGROUND_PICTURE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_BACKGROUND_PICTURE = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE = "image/png";
 
     private static final Instant DEFAULT_PUBLICATION_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_PUBLICATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -104,8 +98,6 @@ public class ArticleResourceIntTest {
      */
     public static Article createEntity(EntityManager em) {
         Article article = new Article()
-            .backgroundPicture(DEFAULT_BACKGROUND_PICTURE)
-            .backgroundPictureContentType(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE)
             .publicationDate(DEFAULT_PUBLICATION_DATE)
             .updateDate(DEFAULT_UPDATE_DATE)
             .creationDate(DEFAULT_CREATION_DATE)
@@ -139,8 +131,6 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeCreate + 1);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getBackgroundPicture()).isEqualTo(DEFAULT_BACKGROUND_PICTURE);
-        assertThat(testArticle.getBackgroundPictureContentType()).isEqualTo(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE);
         assertThat(testArticle.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
         assertThat(testArticle.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
         assertThat(testArticle.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
@@ -214,8 +204,6 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(article.getId().intValue())))
-            .andExpect(jsonPath("$.[*].backgroundPictureContentType").value(hasItem(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].backgroundPicture").value(hasItem(Base64Utils.encodeToString(DEFAULT_BACKGROUND_PICTURE))))
             .andExpect(jsonPath("$.[*].publicationDate").value(hasItem(DEFAULT_PUBLICATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].updateDate").value(hasItem(DEFAULT_UPDATE_DATE.toString())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
@@ -234,8 +222,6 @@ public class ArticleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(article.getId().intValue()))
-            .andExpect(jsonPath("$.backgroundPictureContentType").value(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.backgroundPicture").value(Base64Utils.encodeToString(DEFAULT_BACKGROUND_PICTURE)))
             .andExpect(jsonPath("$.publicationDate").value(DEFAULT_PUBLICATION_DATE.toString()))
             .andExpect(jsonPath("$.updateDate").value(DEFAULT_UPDATE_DATE.toString()))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
@@ -264,8 +250,6 @@ public class ArticleResourceIntTest {
         // Disconnect from session so that the updates on updatedArticle are not directly saved in db
         em.detach(updatedArticle);
         updatedArticle
-            .backgroundPicture(UPDATED_BACKGROUND_PICTURE)
-            .backgroundPictureContentType(UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE)
             .publicationDate(UPDATED_PUBLICATION_DATE)
             .updateDate(UPDATED_UPDATE_DATE)
             .creationDate(UPDATED_CREATION_DATE)
@@ -281,8 +265,6 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeUpdate);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getBackgroundPicture()).isEqualTo(UPDATED_BACKGROUND_PICTURE);
-        assertThat(testArticle.getBackgroundPictureContentType()).isEqualTo(UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE);
         assertThat(testArticle.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
         assertThat(testArticle.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
         assertThat(testArticle.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);

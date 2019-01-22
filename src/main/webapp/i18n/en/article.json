@@ -16,7 +16,6 @@
             "detail": {
                 "title": "Article"
             },
-            "backgroundPicture": "Background Picture",
             "publicationDate": "Publication Date",
             "updateDate": "Update Date",
             "creationDate": "Creation Date",
@@ -25,7 +24,8 @@
             "author": "Author",
             "theme": "Theme",
             "internationalsArticle": "Internationals Article",
-            "tags": "Tags"
+            "tags": "Tags",
+            "backgroundPicture": "Background Picture"
         }
     }
 }
