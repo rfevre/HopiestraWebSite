@@ -4,6 +4,7 @@ import com.hopiestra.site.HopiestraWebSiteApp;
 
 import com.hopiestra.site.domain.InternationalTheme;
 import com.hopiestra.site.domain.Language;
+import com.hopiestra.site.domain.Theme;
 import com.hopiestra.site.repository.InternationalThemeRepository;
 import com.hopiestra.site.service.InternationalThemeService;
 import com.hopiestra.site.web.rest.errors.ExceptionTranslator;
@@ -90,6 +91,11 @@ public class InternationalThemeResourceIntTest {
         em.persist(language);
         em.flush();
         internationalTheme.setLanguage(language);
+        // Add required entity
+        Theme theme = ThemeResourceIntTest.createEntity(em);
+        em.persist(theme);
+        em.flush();
+        internationalTheme.setTheme(theme);
         return internationalTheme;
     }
 

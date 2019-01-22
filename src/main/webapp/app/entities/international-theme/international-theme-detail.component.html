@@ -14,6 +14,12 @@
                 <a [routerLink]="['/language', internationalTheme.language?.id]">{{internationalTheme.language?.name}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.theme">Theme</span></dt>
+        <dd>
+            <div *ngIf="internationalTheme.theme">
+                <a [routerLink]="['/theme', internationalTheme.theme?.id]">{{internationalTheme.theme?.id}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

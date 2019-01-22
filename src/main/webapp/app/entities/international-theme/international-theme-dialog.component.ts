@@ -10,6 +10,7 @@ import { InternationalTheme } from './international-theme.model';
 import { InternationalThemePopupService } from './international-theme-popup.service';
 import { InternationalThemeService } from './international-theme.service';
 import { Language, LanguageService } from '../language';
+import { Theme, ThemeService } from '../theme';
 
 @Component({
     selector: 'jhi-international-theme-dialog',
@@ -22,11 +23,14 @@ export class InternationalThemeDialogComponent implements OnInit {
 
     languages: Language[];
 
+    themes: Theme[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private internationalThemeService: InternationalThemeService,
         private languageService: LanguageService,
+        private themeService: ThemeService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -35,6 +39,8 @@ export class InternationalThemeDialogComponent implements OnInit {
         this.isSaving = false;
         this.languageService.query()
             .subscribe((res: HttpResponse<Language[]>) => { this.languages = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.themeService.query()
+            .subscribe((res: HttpResponse<Theme[]>) => { this.themes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -72,6 +78,10 @@ export class InternationalThemeDialogComponent implements OnInit {
     }
 
     trackLanguageById(index: number, item: Language) {
+        return item.id;
+    }
+
+    trackThemeById(index: number, item: Theme) {
         return item.id;
     }
 }

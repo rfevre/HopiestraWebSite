@@ -5,6 +5,7 @@ export class InternationalTheme implements BaseEntity {
         public id?: number,
         public name?: string,
         public language?: BaseEntity,
+        public theme?: BaseEntity,
     ) {
     }
 }

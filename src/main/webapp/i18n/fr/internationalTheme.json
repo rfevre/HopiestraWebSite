@@ -17,7 +17,8 @@
                 "title": "International Theme"
             },
             "name": "Name",
-            "language": "Language"
+            "language": "Language",
+            "theme": "Theme"
         }
     }
 }

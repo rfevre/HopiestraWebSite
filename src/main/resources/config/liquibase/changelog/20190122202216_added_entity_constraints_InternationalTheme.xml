@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="language"/>
 
+        <addForeignKeyConstraint baseColumnNames="theme_id"
+                                 baseTableName="international_theme"
+                                 constraintName="fk_international_theme_theme_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="theme"/>
+
     </changeSet>
 </databaseChangeLog>

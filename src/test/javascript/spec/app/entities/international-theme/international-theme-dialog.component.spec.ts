@@ -10,6 +10,7 @@ import { InternationalThemeDialogComponent } from '../../../../../../main/webapp
 import { InternationalThemeService } from '../../../../../../main/webapp/app/entities/international-theme/international-theme.service';
 import { InternationalTheme } from '../../../../../../main/webapp/app/entities/international-theme/international-theme.model';
 import { LanguageService } from '../../../../../../main/webapp/app/entities/language';
+import { ThemeService } from '../../../../../../main/webapp/app/entities/theme';
 
 describe('Component Tests', () => {
 
@@ -26,6 +27,7 @@ describe('Component Tests', () => {
                 declarations: [InternationalThemeDialogComponent],
                 providers: [
                     LanguageService,
+                    ThemeService,
                     InternationalThemeService
                 ]
             })

@@ -32,6 +32,10 @@ public class InternationalTheme implements Serializable {
     @NotNull
     private Language language;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @NotNull
+    private Theme theme;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -65,6 +69,19 @@ public class InternationalTheme implements Serializable {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public InternationalTheme theme(Theme theme) {
+        this.theme = theme;
+        return this;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
