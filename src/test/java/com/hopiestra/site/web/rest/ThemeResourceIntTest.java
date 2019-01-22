@@ -20,7 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -39,14 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = HopiestraWebSiteApp.class)
 public class ThemeResourceIntTest {
-
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final byte[] DEFAULT_BACKGROUND_PICTURE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_BACKGROUND_PICTURE = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE = "image/png";
 
     private static final Integer DEFAULT_ORDER = 1;
     private static final Integer UPDATED_ORDER = 2;
@@ -92,9 +83,6 @@ public class ThemeResourceIntTest {
      */
     public static Theme createEntity(EntityManager em) {
         Theme theme = new Theme()
-            .name(DEFAULT_NAME)
-            .backgroundPicture(DEFAULT_BACKGROUND_PICTURE)
-            .backgroundPictureContentType(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE)
             .order(DEFAULT_ORDER);
         return theme;
     }
@@ -119,9 +107,6 @@ public class ThemeResourceIntTest {
         List<Theme> themeList = themeRepository.findAll();
         assertThat(themeList).hasSize(databaseSizeBeforeCreate + 1);
         Theme testTheme = themeList.get(themeList.size() - 1);
-        assertThat(testTheme.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testTheme.getBackgroundPicture()).isEqualTo(DEFAULT_BACKGROUND_PICTURE);
-        assertThat(testTheme.getBackgroundPictureContentType()).isEqualTo(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE);
         assertThat(testTheme.getOrder()).isEqualTo(DEFAULT_ORDER);
     }
 
@@ -146,24 +131,6 @@ public class ThemeResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = themeRepository.findAll().size();
-        // set the field null
-        theme.setName(null);
-
-        // Create the Theme, which fails.
-
-        restThemeMockMvc.perform(post("/api/themes")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(theme)))
-            .andExpect(status().isBadRequest());
-
-        List<Theme> themeList = themeRepository.findAll();
-        assertThat(themeList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllThemes() throws Exception {
         // Initialize the database
         themeRepository.saveAndFlush(theme);
@@ -173,9 +140,6 @@ public class ThemeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(theme.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].backgroundPictureContentType").value(hasItem(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].backgroundPicture").value(hasItem(Base64Utils.encodeToString(DEFAULT_BACKGROUND_PICTURE))))
             .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)));
     }
 
@@ -190,9 +154,6 @@ public class ThemeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(theme.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.backgroundPictureContentType").value(DEFAULT_BACKGROUND_PICTURE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.backgroundPicture").value(Base64Utils.encodeToString(DEFAULT_BACKGROUND_PICTURE)))
             .andExpect(jsonPath("$.order").value(DEFAULT_ORDER));
     }
 
@@ -217,9 +178,6 @@ public class ThemeResourceIntTest {
         // Disconnect from session so that the updates on updatedTheme are not directly saved in db
         em.detach(updatedTheme);
         updatedTheme
-            .name(UPDATED_NAME)
-            .backgroundPicture(UPDATED_BACKGROUND_PICTURE)
-            .backgroundPictureContentType(UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE)
             .order(UPDATED_ORDER);
 
         restThemeMockMvc.perform(put("/api/themes")
@@ -231,9 +189,6 @@ public class ThemeResourceIntTest {
         List<Theme> themeList = themeRepository.findAll();
         assertThat(themeList).hasSize(databaseSizeBeforeUpdate);
         Theme testTheme = themeList.get(themeList.size() - 1);
-        assertThat(testTheme.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testTheme.getBackgroundPicture()).isEqualTo(UPDATED_BACKGROUND_PICTURE);
-        assertThat(testTheme.getBackgroundPictureContentType()).isEqualTo(UPDATED_BACKGROUND_PICTURE_CONTENT_TYPE);
         assertThat(testTheme.getOrder()).isEqualTo(UPDATED_ORDER);
     }
 

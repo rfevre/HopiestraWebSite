@@ -1,0 +1,58 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Nabot (generated)" id="1548189915260-1">
+        <createTable tableName="image">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="imagePK"/>
+            </column>
+            <column name="image_blob" type="OID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_blob_content_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-2">
+        <createTable tableName="international_theme">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="international_themePK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="language_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-3">
+        <addColumn tableName="theme">
+            <column name="background_picture_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-4">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="international_theme" constraintName="FKdoq6twa3x3hie8l1wvgaeglv0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="language"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-5">
+        <addForeignKeyConstraint baseColumnNames="background_picture_id" baseTableName="theme" constraintName="FKh19cmjuvfiimt88x02hueh6g1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="image"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-6">
+        <dropUniqueConstraint constraintName="jhi_social_user_connection_user_id_provider_id_provider_use_key" tableName="jhi_social_user_connection"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-7">
+        <dropUniqueConstraint constraintName="jhi_social_user_connection_user_id_provider_id_rank_key" tableName="jhi_social_user_connection"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-8">
+        <dropColumn columnName="background_picture" tableName="theme"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-9">
+        <dropColumn columnName="background_picture_content_type" tableName="theme"/>
+    </changeSet>
+    <changeSet author="Nabot (generated)" id="1548189915260-10">
+        <dropColumn columnName="name" tableName="theme"/>
+    </changeSet>
+</databaseChangeLog>

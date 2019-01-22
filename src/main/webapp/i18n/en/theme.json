@@ -16,11 +16,10 @@
             "detail": {
                 "title": "Theme"
             },
-            "name": "Name",
-            "backgroundPicture": "Background Picture",
             "order": "Order",
             "parentTheme": "Parent Theme",
-            "themeSubscriptions": "Theme Subscriptions"
+            "themeSubscriptions": "Theme Subscriptions",
+            "backgroundPicture": "Background Picture"
         }
     }
 }

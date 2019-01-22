@@ -5,7 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -27,17 +26,6 @@ public class Theme implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Lob
-    @Column(name = "background_picture")
-    private byte[] backgroundPicture;
-
-    @Column(name = "background_picture_content_type")
-    private String backgroundPictureContentType;
-
     @Column(name = "jhi_order")
     private Integer order;
 
@@ -49,6 +37,9 @@ public class Theme implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ThemeSubscription> themeSubscriptions = new HashSet<>();
 
+    @ManyToOne
+    private Image backgroundPicture;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -56,45 +47,6 @@ public class Theme implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Theme name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public byte[] getBackgroundPicture() {
-        return backgroundPicture;
-    }
-
-    public Theme backgroundPicture(byte[] backgroundPicture) {
-        this.backgroundPicture = backgroundPicture;
-        return this;
-    }
-
-    public void setBackgroundPicture(byte[] backgroundPicture) {
-        this.backgroundPicture = backgroundPicture;
-    }
-
-    public String getBackgroundPictureContentType() {
-        return backgroundPictureContentType;
-    }
-
-    public Theme backgroundPictureContentType(String backgroundPictureContentType) {
-        this.backgroundPictureContentType = backgroundPictureContentType;
-        return this;
-    }
-
-    public void setBackgroundPictureContentType(String backgroundPictureContentType) {
-        this.backgroundPictureContentType = backgroundPictureContentType;
     }
 
     public Integer getOrder() {
@@ -147,6 +99,19 @@ public class Theme implements Serializable {
     public void setThemeSubscriptions(Set<ThemeSubscription> themeSubscriptions) {
         this.themeSubscriptions = themeSubscriptions;
     }
+
+    public Image getBackgroundPicture() {
+        return backgroundPicture;
+    }
+
+    public Theme backgroundPicture(Image image) {
+        this.backgroundPicture = image;
+        return this;
+    }
+
+    public void setBackgroundPicture(Image image) {
+        this.backgroundPicture = image;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -173,9 +138,6 @@ public class Theme implements Serializable {
     public String toString() {
         return "Theme{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", backgroundPicture='" + getBackgroundPicture() + "'" +
-            ", backgroundPictureContentType='" + getBackgroundPictureContentType() + "'" +
             ", order=" + getOrder() +
             "}";
     }

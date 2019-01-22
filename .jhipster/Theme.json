@@ -13,21 +13,15 @@
             "relationshipType": "many-to-many",
             "ownerSide": false,
             "otherEntityRelationshipName": "themes"
+        },
+        {
+            "relationshipName": "backgroundPicture",
+            "otherEntityName": "image",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "backgroundPicture",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
-        },
         {
             "fieldName": "order",
             "fieldType": "Integer"

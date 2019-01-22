@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { Theme } from './theme.model';
 import { ThemePopupService } from './theme-popup.service';
 import { ThemeService } from './theme.service';
 import { ThemeSubscription, ThemeSubscriptionService } from '../theme-subscription';
+import { Image, ImageService } from '../image';
 
 @Component({
     selector: 'jhi-theme-dialog',
@@ -24,13 +25,14 @@ export class ThemeDialogComponent implements OnInit {
 
     themesubscriptions: ThemeSubscription[];
 
+    images: Image[];
+
     constructor(
         public activeModal: NgbActiveModal,
-        private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private themeService: ThemeService,
         private themeSubscriptionService: ThemeSubscriptionService,
-        private elementRef: ElementRef,
+        private imageService: ImageService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -41,22 +43,8 @@ export class ThemeDialogComponent implements OnInit {
             .subscribe((res: HttpResponse<Theme[]>) => { this.themes = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
         this.themeSubscriptionService.query()
             .subscribe((res: HttpResponse<ThemeSubscription[]>) => { this.themesubscriptions = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
-    }
-
-    clearInputImage(field: string, fieldContentType: string, idInput: string) {
-        this.dataUtils.clearInputImage(this.theme, this.elementRef, field, fieldContentType, idInput);
+        this.imageService.query()
+            .subscribe((res: HttpResponse<Image[]>) => { this.images = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -98,6 +86,10 @@ export class ThemeDialogComponent implements OnInit {
     }
 
     trackThemeSubscriptionById(index: number, item: ThemeSubscription) {
+        return item.id;
+    }
+
+    trackImageById(index: number, item: Image) {
         return item.id;
     }
 

@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="theme"/>
 
+        <addForeignKeyConstraint baseColumnNames="background_picture_id"
+                                 baseTableName="theme"
+                                 constraintName="fk_theme_background_picture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image"/>
+
     </changeSet>
 </databaseChangeLog>

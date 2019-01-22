@@ -10,6 +10,7 @@ import { ThemeDialogComponent } from '../../../../../../main/webapp/app/entities
 import { ThemeService } from '../../../../../../main/webapp/app/entities/theme/theme.service';
 import { Theme } from '../../../../../../main/webapp/app/entities/theme/theme.model';
 import { ThemeSubscriptionService } from '../../../../../../main/webapp/app/entities/theme-subscription';
+import { ImageService } from '../../../../../../main/webapp/app/entities/image';
 
 describe('Component Tests', () => {
 
@@ -26,6 +27,7 @@ describe('Component Tests', () => {
                 declarations: [ThemeDialogComponent],
                 providers: [
                     ThemeSubscriptionService,
+                    ImageService,
                     ThemeService
                 ]
             })

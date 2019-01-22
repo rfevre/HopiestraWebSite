@@ -13,34 +13,6 @@
                    [(ngModel)]="theme.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.theme.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="theme.name" required/>
-            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.theme.backgroundPicture" for="field_backgroundPicture">Background Picture</label>
-            <div>
-                <img [src]="'data:' + theme.backgroundPictureContentType + ';base64,' + theme.backgroundPicture" style="max-height: 100px;" *ngIf="theme.backgroundPicture" alt="theme image"/>
-                <div *ngIf="theme.backgroundPicture" class="form-text text-danger clearfix">
-                    <span class="pull-left">{{theme.backgroundPictureContentType}}, {{byteSize(theme.backgroundPicture)}}</span>
-                    <button type="button" (click)="clearInputImage('backgroundPicture', 'backgroundPictureContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                        <span class="fa fa-times"></span>
-                    </button>
-                </div>
-                <input type="file" id="file_backgroundPicture" (change)="setFileData($event, theme, 'backgroundPicture', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-            </div>
-            <input type="hidden" class="form-control" name="backgroundPicture" id="field_backgroundPicture"
-                [(ngModel)]="theme.backgroundPicture" />
-            <input type="hidden" class="form-control" name="backgroundPictureContentType" id="field_backgroundPictureContentType"
-                [(ngModel)]="theme.backgroundPictureContentType" />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.theme.order" for="field_order">Order</label>
             <input type="number" class="form-control" name="order" id="field_order"
                 [(ngModel)]="theme.order" />
@@ -51,6 +23,13 @@
             <select class="form-control" id="field_parentTheme" name="parentTheme" [(ngModel)]="theme.parentTheme" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="themeOption.id === theme.parentTheme?.id ? theme.parentTheme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.theme.backgroundPicture" for="field_backgroundPicture">Background Picture</label>
+            <select class="form-control" id="field_backgroundPicture" name="backgroundPicture" [(ngModel)]="theme.backgroundPicture" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="imageOption.id === theme.backgroundPicture?.id ? theme.backgroundPicture : imageOption" *ngFor="let imageOption of images; trackBy: trackImageById">{{imageOption.name}}</option>
             </select>
         </div>
     </div>
