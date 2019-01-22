@@ -17,7 +17,7 @@
         <dt><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.theme">Theme</span></dt>
         <dd>
             <div *ngIf="internationalTheme.theme">
-                <a [routerLink]="['/theme', internationalTheme.theme?.id]">{{internationalTheme.theme?.id}}</a>
+                <a [routerLink]="['/theme', internationalTheme.theme?.id]">{{internationalTheme.theme?.adminTitle}}</a>
             </div>
         </dd>
     </dl>

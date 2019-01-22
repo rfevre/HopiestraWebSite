@@ -17,7 +17,7 @@
             "relationshipValidateRules": [
                 "required"
             ],
-            "otherEntityField": "id"
+            "otherEntityField": "adminTitle"
         }
     ],
     "fields": [

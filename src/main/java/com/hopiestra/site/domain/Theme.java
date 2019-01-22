@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -29,6 +30,10 @@ public class Theme implements Serializable {
     @Column(name = "jhi_order")
     private Integer order;
 
+    @NotNull
+    @Column(name = "admin_title", nullable = false, unique = true)
+    private String adminTitle;
+
     @ManyToOne
     private Theme parentTheme;
 
@@ -39,6 +44,11 @@ public class Theme implements Serializable {
 
     @ManyToOne
     private Image backgroundPicture;
+
+    @OneToMany(mappedBy = "theme")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<InternationalTheme> internationalThemes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -60,6 +70,19 @@ public class Theme implements Serializable {
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public String getAdminTitle() {
+        return adminTitle;
+    }
+
+    public Theme adminTitle(String adminTitle) {
+        this.adminTitle = adminTitle;
+        return this;
+    }
+
+    public void setAdminTitle(String adminTitle) {
+        this.adminTitle = adminTitle;
     }
 
     public Theme getParentTheme() {
@@ -112,6 +135,31 @@ public class Theme implements Serializable {
     public void setBackgroundPicture(Image image) {
         this.backgroundPicture = image;
     }
+
+    public Set<InternationalTheme> getInternationalThemes() {
+        return internationalThemes;
+    }
+
+    public Theme internationalThemes(Set<InternationalTheme> internationalThemes) {
+        this.internationalThemes = internationalThemes;
+        return this;
+    }
+
+    public Theme addInternationalThemes(InternationalTheme internationalTheme) {
+        this.internationalThemes.add(internationalTheme);
+        internationalTheme.setTheme(this);
+        return this;
+    }
+
+    public Theme removeInternationalThemes(InternationalTheme internationalTheme) {
+        this.internationalThemes.remove(internationalTheme);
+        internationalTheme.setTheme(null);
+        return this;
+    }
+
+    public void setInternationalThemes(Set<InternationalTheme> internationalThemes) {
+        this.internationalThemes = internationalThemes;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -139,6 +187,7 @@ public class Theme implements Serializable {
         return "Theme{" +
             "id=" + getId() +
             ", order=" + getOrder() +
+            ", adminTitle='" + getAdminTitle() + "'" +
             "}";
     }
 }

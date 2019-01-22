@@ -86,6 +86,7 @@ public class ArticleService {
 
                 if(theme.getId().equals(themeId)) {
                     themesId.add(subThemeId);
+                    break;
                 }
             }
         }

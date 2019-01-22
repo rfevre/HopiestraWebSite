@@ -41,7 +41,7 @@
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.internationalTheme.theme" for="field_theme">Theme</label>
             <select class="form-control" id="field_theme" name="theme" [(ngModel)]="internationalTheme.theme"  required>
                 <option *ngIf="!editForm.value.theme" [ngValue]="null" selected></option>
-                <option [ngValue]="themeOption.id === internationalTheme.theme?.id ? internationalTheme.theme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.id}}</option>
+                <option [ngValue]="themeOption.id === internationalTheme.theme?.id ? internationalTheme.theme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.adminTitle}}</option>
             </select>
         </div>
         <div [hidden]="!(editForm.controls.theme?.dirty && editForm.controls.theme?.invalid)">

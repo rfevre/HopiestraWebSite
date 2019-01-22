@@ -19,7 +19,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="language.name"><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.language">Language</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="theme.id"><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.theme">Theme</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="theme.adminTitle"><span jhiTranslate="hopiestraWebSiteApp.internationalTheme.theme">Theme</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -34,7 +34,7 @@
                 </td>
                 <td>
                     <div *ngIf="internationalTheme.theme">
-                        <a [routerLink]="['../theme', internationalTheme.theme?.id ]" >{{internationalTheme.theme?.id}}</a>
+                        <a [routerLink]="['../theme', internationalTheme.theme?.id ]" >{{internationalTheme.theme?.adminTitle}}</a>
                     </div>
                 </td>
                 <td class="text-right">

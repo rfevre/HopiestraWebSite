@@ -19,12 +19,25 @@
             "otherEntityName": "image",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "internationalThemes",
+            "otherEntityName": "internationalTheme",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "theme"
         }
     ],
     "fields": [
         {
             "fieldName": "order",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "adminTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180613112122",

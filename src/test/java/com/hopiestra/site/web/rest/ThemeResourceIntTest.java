@@ -42,6 +42,9 @@ public class ThemeResourceIntTest {
     private static final Integer DEFAULT_ORDER = 1;
     private static final Integer UPDATED_ORDER = 2;
 
+    private static final String DEFAULT_ADMIN_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_ADMIN_TITLE = "BBBBBBBBBB";
+
     @Autowired
     private ThemeRepository themeRepository;
 
@@ -83,7 +86,8 @@ public class ThemeResourceIntTest {
      */
     public static Theme createEntity(EntityManager em) {
         Theme theme = new Theme()
-            .order(DEFAULT_ORDER);
+            .order(DEFAULT_ORDER)
+            .adminTitle(DEFAULT_ADMIN_TITLE);
         return theme;
     }
 
@@ -108,6 +112,7 @@ public class ThemeResourceIntTest {
         assertThat(themeList).hasSize(databaseSizeBeforeCreate + 1);
         Theme testTheme = themeList.get(themeList.size() - 1);
         assertThat(testTheme.getOrder()).isEqualTo(DEFAULT_ORDER);
+        assertThat(testTheme.getAdminTitle()).isEqualTo(DEFAULT_ADMIN_TITLE);
     }
 
     @Test
@@ -131,6 +136,24 @@ public class ThemeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkAdminTitleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = themeRepository.findAll().size();
+        // set the field null
+        theme.setAdminTitle(null);
+
+        // Create the Theme, which fails.
+
+        restThemeMockMvc.perform(post("/api/themes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(theme)))
+            .andExpect(status().isBadRequest());
+
+        List<Theme> themeList = themeRepository.findAll();
+        assertThat(themeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllThemes() throws Exception {
         // Initialize the database
         themeRepository.saveAndFlush(theme);
@@ -140,7 +163,8 @@ public class ThemeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(theme.getId().intValue())))
-            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)));
+            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)))
+            .andExpect(jsonPath("$.[*].adminTitle").value(hasItem(DEFAULT_ADMIN_TITLE.toString())));
     }
 
     @Test
@@ -154,7 +178,8 @@ public class ThemeResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(theme.getId().intValue()))
-            .andExpect(jsonPath("$.order").value(DEFAULT_ORDER));
+            .andExpect(jsonPath("$.order").value(DEFAULT_ORDER))
+            .andExpect(jsonPath("$.adminTitle").value(DEFAULT_ADMIN_TITLE.toString()));
     }
 
     @Test
@@ -178,7 +203,8 @@ public class ThemeResourceIntTest {
         // Disconnect from session so that the updates on updatedTheme are not directly saved in db
         em.detach(updatedTheme);
         updatedTheme
-            .order(UPDATED_ORDER);
+            .order(UPDATED_ORDER)
+            .adminTitle(UPDATED_ADMIN_TITLE);
 
         restThemeMockMvc.perform(put("/api/themes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -190,6 +216,7 @@ public class ThemeResourceIntTest {
         assertThat(themeList).hasSize(databaseSizeBeforeUpdate);
         Theme testTheme = themeList.get(themeList.size() - 1);
         assertThat(testTheme.getOrder()).isEqualTo(UPDATED_ORDER);
+        assertThat(testTheme.getAdminTitle()).isEqualTo(UPDATED_ADMIN_TITLE);
     }
 
     @Test

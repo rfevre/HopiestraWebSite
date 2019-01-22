@@ -32,7 +32,7 @@ public class InternationalTheme implements Serializable {
     @NotNull
     private Language language;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @NotNull
     private Theme theme;
 

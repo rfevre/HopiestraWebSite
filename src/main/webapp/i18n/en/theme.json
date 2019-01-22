@@ -17,9 +17,11 @@
                 "title": "Theme"
             },
             "order": "Order",
+            "adminTitle": "Admin Title",
             "parentTheme": "Parent Theme",
             "themeSubscriptions": "Theme Subscriptions",
-            "backgroundPicture": "Background Picture"
+            "backgroundPicture": "Background Picture",
+            "internationalThemes": "International Themes"
         }
     }
 }
