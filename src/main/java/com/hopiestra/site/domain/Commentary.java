@@ -32,7 +32,7 @@ public class Commentary implements Serializable {
     @NotNull
     private User author;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @NotNull
     private Article article;
 
