@@ -124,4 +124,19 @@ public class InternationalThemeResource {
         internationalThemeService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+        /**
+     * GET  /international-themes/theme/:themeId/lang-code/:langCode : get the "id" InternationalTheme.
+     *
+     * @param id the id of the InternationalTheme to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the InternationalTheme, or with status 404 (Not Found)
+     */
+    @GetMapping("/international-themes/theme/{themeId}/lang-code/{langCode}")
+    @Timed
+    public ResponseEntity<InternationalTheme> getInternationalThemeByArticleIdAndLangCode(@PathVariable Long themeId, @PathVariable String langCode) {
+        log.debug("REST request to get InternationalTheme by theme id and language code : {}", themeId, langCode);
+        InternationalTheme internationalTheme = internationalThemeService.findByThemeAndLangCode(themeId, langCode);
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(internationalTheme));
+    }
 }

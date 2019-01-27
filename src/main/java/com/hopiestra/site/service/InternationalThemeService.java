@@ -69,4 +69,16 @@ public class InternationalThemeService {
         log.debug("Request to delete InternationalTheme : {}", id);
         internationalThemeRepository.delete(id);
     }
+
+    /**
+     * Get one InternationalTheme by theme id and language code.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    @Transactional(readOnly = true)
+    public InternationalTheme findByThemeAndLangCode(Long themeId, String langCode) {
+        log.debug("Request to get InternationalTheme by theme id and language code: {}", themeId, langCode);
+        return internationalThemeRepository.findByThemeAndLangCode(themeId, langCode);
+    }
 }
