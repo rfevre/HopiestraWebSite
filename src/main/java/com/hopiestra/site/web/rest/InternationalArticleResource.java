@@ -140,6 +140,7 @@ public class InternationalArticleResource {
         // Clear content pour loading plus rapide sur la liste des articles
         if(internationalArticle != null) {
             internationalArticle.setContent("");
+            internationalArticle.setArticle(null);
         }
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(internationalArticle));

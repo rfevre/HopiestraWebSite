@@ -109,6 +109,11 @@ public class ArticleResource {
         log.debug("REST request to get a page of Articles");
         Page<Article> page = articleService.findAllByTheme(pageable, themeId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/articles");
+        if(page.getNumberOfElements()>0) {
+            page.forEach(article -> {
+                article.setTheme(null);
+            });
+        }
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

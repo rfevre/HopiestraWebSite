@@ -137,6 +137,11 @@ public class InternationalThemeResource {
         log.debug("REST request to get InternationalTheme by theme id and language code : {}", themeId, langCode);
         InternationalTheme internationalTheme = internationalThemeService.findByThemeAndLangCode(themeId, langCode);
 
+        // Clear content pour loading plus rapide sur la liste des articles
+        if(internationalTheme != null) {
+            internationalTheme.setTheme(null);
+        }
+
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(internationalTheme));
     }
 }
