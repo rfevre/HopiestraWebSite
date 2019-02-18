@@ -33,7 +33,7 @@
             <label class="form-control-label" jhiTranslate="hopiestraWebSiteApp.theme.parentTheme" for="field_parentTheme">Parent Theme</label>
             <select class="form-control" id="field_parentTheme" name="parentTheme" [(ngModel)]="theme.parentTheme" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="themeOption.id === theme.parentTheme?.id ? theme.parentTheme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.name}}</option>
+                <option [ngValue]="themeOption.id === theme.parentTheme?.id ? theme.parentTheme : themeOption" *ngFor="let themeOption of themes; trackBy: trackThemeById">{{themeOption.adminTitle}}</option>
             </select>
         </div>
         <div class="form-group">
