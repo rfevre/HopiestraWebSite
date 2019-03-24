@@ -131,10 +131,6 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeCreate + 1);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getPublicationDate()).isEqualTo(DEFAULT_PUBLICATION_DATE);
-        assertThat(testArticle.getUpdateDate()).isEqualTo(DEFAULT_UPDATE_DATE);
-        assertThat(testArticle.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
-        assertThat(testArticle.getDeleteDate()).isEqualTo(DEFAULT_DELETE_DATE);
         assertThat(testArticle.getAdminTitle()).isEqualTo(DEFAULT_ADMIN_TITLE);
     }
 
@@ -265,10 +261,6 @@ public class ArticleResourceIntTest {
         List<Article> articleList = articleRepository.findAll();
         assertThat(articleList).hasSize(databaseSizeBeforeUpdate);
         Article testArticle = articleList.get(articleList.size() - 1);
-        assertThat(testArticle.getPublicationDate()).isEqualTo(UPDATED_PUBLICATION_DATE);
-        assertThat(testArticle.getUpdateDate()).isEqualTo(UPDATED_UPDATE_DATE);
-        assertThat(testArticle.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
-        assertThat(testArticle.getDeleteDate()).isEqualTo(UPDATED_DELETE_DATE);
         assertThat(testArticle.getAdminTitle()).isEqualTo(UPDATED_ADMIN_TITLE);
     }
 
